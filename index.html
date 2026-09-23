@@ -68,10 +68,22 @@ p{margin:0}
 .rail-sub{color:var(--ink-2); font-size:.9rem; max-width:62ch}
 .rail-meta{display:flex; align-items:center; gap:10px; flex:none}
 .count{font-family:"Space Mono",monospace; font-size:.68rem; color:var(--ink-3)}
-.arrows{display:flex; gap:5px}
-.arrow{width:30px; height:30px; border-radius:99px; border:1px solid var(--line); background:var(--surface); color:var(--ink-2); cursor:pointer; display:grid; place-items:center; padding:0; transition:background .2s,color .2s}
+.arrows{display:flex; gap:6px; align-items:center}
+.arrow{width:34px; height:34px; border-radius:99px; border:1px solid var(--line); background:var(--surface); color:var(--ink-2); cursor:pointer; display:grid; place-items:center; padding:0;
+  transition:background .2s,color .2s,transform .25s,width .25s,height .25s,box-shadow .25s}
+.arrow svg{width:14px; height:14px; transition:width .25s,height .25s}
 .arrow:hover{background:var(--ink); color:var(--bg)}
-.arrow svg{width:13px; height:13px}
+.arrow[disabled]{opacity:.22; pointer-events:none}
+/* a seta que ainda tem conteúdo à frente fica viva */
+.arrow.live{border-color:var(--accent); color:var(--accent)}
+.arrow.grow{width:52px; height:52px; background:var(--accent); border-color:var(--accent); color:var(--accent-ink); box-shadow:var(--shadow)}
+.arrow.grow svg{width:22px; height:22px}
+
+.rail-track{position:relative}
+/* névoa na borda direita: sinal de que tem mais */
+.rail-track::after{content:""; position:absolute; top:0; bottom:0; right:0; width:72px; pointer-events:none; opacity:0; transition:opacity .3s;
+  background:linear-gradient(to right, transparent, var(--bg))}
+.rail-track.more::after{opacity:1}
 .track{display:flex; gap:16px; overflow-x:auto; scroll-behavior:smooth; scroll-snap-type:x proximity; padding:18px 2px 6px; scrollbar-width:none}
 .track::-webkit-scrollbar{display:none}
 
@@ -173,8 +185,8 @@ FAIXAS.forEach(function(faixa, i){
     '<div class="rail-head"><div><h2>' + faixa.nome + '</h2><p class="rail-sub">' + faixa.sub + '</p></div>' +
     '<div class="rail-meta"><span class="count mono">' + faixa.pecas.length + ' peças</span><div class="arrows">' +
     '<button class="arrow" data-rail="' + railId + '" data-dir="-1" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none"><path d="M15 5L8 12l7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-    '<button class="arrow" data-rail="' + railId + '" data-dir="1" aria-label="Avançar"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-    '</div></div></div><div class="track" id="' + railId + '"></div>';
+    '<button class="arrow next" data-rail="' + railId + '" data-dir="1" aria-label="Avançar"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
+    '</div></div></div><div class="rail-track"><div class="track" id="' + railId + '"></div></div>';
 
   const track = sec.querySelector(".track");
 
@@ -214,8 +226,7 @@ contato.textContent = "Contato";
 nav.appendChild(contato);
 document.querySelector(".closing").id = "contato";
 
-document.getElementById("foot").textContent =
-  "Sala de Projeção — " + comVideo + " de " + total + " peças com vídeo no ar. Acervo completo desde 2020.";
+document.getElementById("foot").textContent = "Dilo · editando desde 2020. Sempre entra peça nova.";
 
 document.querySelectorAll(".arrow").forEach(function(btn){
   btn.addEventListener("click", function(){
@@ -224,6 +235,38 @@ document.querySelectorAll(".arrow").forEach(function(btn){
     const step = card ? card.getBoundingClientRect().width + 16 : 200;
     track.scrollBy({ left: step * 2 * Number(btn.dataset.dir), behavior: "smooth" });
   });
+});
+
+/* --- as setas contam o que tem adiante --- */
+document.querySelectorAll(".track").forEach(function(track){
+  const rail = track.closest(".rail");
+  const prev = rail.querySelector('.arrow[data-dir="-1"]');
+  const next = rail.querySelector(".arrow.next");
+  const moldura = track.closest(".rail-track");
+
+  function medir(){
+    const sobra = track.scrollWidth - track.clientWidth;
+    if (sobra < 8){ prev.hidden = true; next.hidden = true; moldura.classList.remove("more"); return; }
+    prev.hidden = false; next.hidden = false;
+    const fim = track.scrollLeft >= sobra - 8;
+    prev.disabled = track.scrollLeft < 8;
+    next.disabled = fim;
+    next.classList.toggle("live", !fim);
+    moldura.classList.toggle("more", !fim);
+    if (fim) next.classList.remove("grow");
+  }
+
+  /* chegou perto do fim da fila com o mouse: a seta cresce e chama */
+  track.addEventListener("mousemove", function(e){
+    if (next.disabled || next.hidden) return;
+    const borda = track.getBoundingClientRect().right;
+    next.classList.toggle("grow", borda - e.clientX < 260);
+  });
+  track.addEventListener("mouseleave", function(){ next.classList.remove("grow"); });
+
+  track.addEventListener("scroll", medir, { passive:true });
+  window.addEventListener("resize", medir);
+  medir();
 });
 
 const lb = document.getElementById("lb");

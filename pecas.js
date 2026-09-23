@@ -28,13 +28,12 @@ const FAIXAS = [
   {
     id: "personagens",
     nome: "Personagens",
-    sub: "Gente que não existe, mantida igual de um plano pro outro.",
+    sub: "Manter o mesmo rosto, a mesma pele e o mesmo corpo de uma cena pra outra é a parte mais difícil de vídeo com IA — é onde quase todo mundo desiste. Estes aqui atravessam o vídeo inteiro sem mudar.",
     pecas: [
+      { titulo: "Leon Nayabing", spec: "100% IA · vitiligo no corpo inteiro", linha: "Vitiligo é o teste mais duro que existe: o padrão de manchas tem que repetir igual em todo plano.", video: null, capa: null },
+      { titulo: "Vitália", spec: "narrativa · personagem próprio", linha: "Assessora de condomínio com sotaque, história e telefone — uma narrativa inteira sustentada por uma pessoa que não existe.", video: null, capa: null },
       { titulo: "Cleitin", spec: "3 episódios", linha: "Personagem construído na mão, antes de existir ferramenta que fizesse isso — e consistente nos três.", video: null, capa: null },
-      { titulo: "O do vitiligo", spec: "100% IA · consistência fechada", linha: "Vitiligo é o teste mais duro que existe: o padrão de manchas tem que repetir igual em todo plano.", video: null, capa: null },
-      { titulo: "A assessora do condomínio", spec: "narrativa · personagem próprio", linha: "Sotaque, história e telefone: uma narrativa inteira sustentada por uma pessoa que não existe.", video: null, capa: null },
-      { titulo: "Vitório — o jogador", spec: "animação · 19 frames · 6 takes", linha: "Freela de animação fechado, entregue e pago.", video: null, capa: null },
-      { titulo: "O elenco do Vila Fitness", spec: "8 personagens · 26 frames", linha: "Um elenco inteiro desenhado antes da primeira cena ser gerada.", video: null, capa: null }
+      { titulo: "Vitório — o jogador", spec: "animação · 19 frames · 6 takes", linha: "Freela de animação fechado, entregue e pago.", video: null, capa: null }
     ]
   },
   {
@@ -55,9 +54,7 @@ const FAIXAS = [
     nome: "Curso e infoproduto",
     sub: "Aula gravada virando produto pronto pra vender. É a coisa mais antiga que eu faço — desde 2020.",
     pecas: [
-      { titulo: "Projeto 100K", spec: "8 aulas · evergreen", linha: "Curso entregue pronto pra vender. Fez R$5.297 no primeiro mês.", video: null, capa: null },
-      { titulo: "Insider / Hélio Azevedo", spec: "desde 2020", linha: "Onde eu aprendi a montar curso. O método é o mesmo até hoje.", video: null, capa: null },
-      { titulo: "Treinamento de vendas", spec: "curso completo", linha: "Do material bruto ao entregável, sem o cliente tocar em nada.", video: null, capa: null }
+      { titulo: "Projeto 100K", spec: "8 aulas · evergreen", linha: "Curso entregue pronto pra vender. Fez R$5.297 no primeiro mês.", video: null, capa: null }
     ]
   },
   {

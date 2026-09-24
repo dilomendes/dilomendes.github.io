@@ -177,7 +177,7 @@ FAIXAS.forEach(function(faixa, i){
     card.className = "card" + (p.video ? " has-video" : "");
     const tags = p.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join("");
     const media = p.video
-      ? '<div class="media"><video src="' + p.video + '" ' + (p.capa ? 'poster="' + p.capa + '" ' : "") + 'muted loop playsinline preload="none"></video><span class="play-ico">' + ICON_PLAY + '</span></div>'
+      ? '<div class="media"><video src="' + (p.preview || p.video) + '" ' + (p.capa ? 'poster="' + p.capa + '" ' : "") + 'muted loop playsinline preload="none"></video><span class="play-ico">' + ICON_PLAY + '</span></div>'
       : '<div class="media"><span class="empty">em breve</span></div>';
     card.innerHTML = media + '<span class="c-title">' + p.titulo + '</span><div class="tags">' + tags + '</div>';
 

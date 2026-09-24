@@ -67,6 +67,13 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 .arrow.grow{width:54px; height:54px; background:var(--ink); color:var(--bg); border-color:var(--ink)}
 .arrow.grow svg{width:22px; height:22px}
 
+/* filtro de subnicho */
+.nichos{display:flex; gap:5px; flex-wrap:wrap; margin-top:12px}
+.nicho{font-size:.7rem; font-weight:500; color:var(--ink-3); background:transparent; border:1px solid var(--line-2); border-radius:99px; padding:5px 12px; cursor:pointer; transition:all .18s}
+.nicho:hover{color:var(--ink); border-color:var(--ink-3)}
+.nicho.on{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.card[hidden]{display:none}
+
 .rail-track{position:relative}
 .rail-track::after{content:""; position:absolute; top:0; bottom:0; right:0; width:90px; pointer-events:none; opacity:0; transition:opacity .3s; background:linear-gradient(to right, transparent, var(--bg))}
 .rail-track.more::after{opacity:1}
@@ -168,7 +175,10 @@ FAIXAS.forEach(function(faixa, i){
     '<div class="arrows">' +
     '<button class="arrow" data-rail="' + railId + '" data-dir="-1" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none"><path d="M15 5L8 12l7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
     '<button class="arrow next" data-rail="' + railId + '" data-dir="1" aria-label="Avançar"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-    '</div></div><div class="rail-track"><div class="track" id="' + railId + '"></div></div>';
+    '</div></div>' +
+    (faixa.nichos ? '<div class="nichos"><button class="nicho on" data-nicho="todos">Todos</button>' +
+      faixa.nichos.map(function(n){ return '<button class="nicho" data-nicho="' + n.id + '">' + n.nome + '</button>'; }).join("") + '</div>' : "") +
+    '<div class="rail-track"><div class="track" id="' + railId + '"></div></div>';
 
   const track = sec.querySelector(".track");
 
@@ -180,6 +190,7 @@ FAIXAS.forEach(function(faixa, i){
       ? '<div class="media"><video src="' + (p.preview || p.video) + '" ' + (p.capa ? 'poster="' + p.capa + '" ' : "") + 'muted loop playsinline preload="none"></video><span class="play-ico">' + ICON_PLAY + '</span></div>'
       : '<div class="media"><span class="empty">em breve</span></div>';
     card.innerHTML = media + '<span class="c-title">' + p.titulo + '</span><div class="tags">' + tags + '</div>';
+    if (p.nicho) card.dataset.nicho = p.nicho;
 
     if (p.video) {
       const vid = card.querySelector("video");
@@ -231,6 +242,21 @@ document.querySelectorAll(".track").forEach(function(track){
   track.addEventListener("mouseleave", function(){ next.classList.remove("grow"); });
   track.addEventListener("scroll", medir, { passive:true });
   window.addEventListener("resize", medir);
+
+  /* filtro de subnicho: some o que não é do nicho e remede as setas */
+  const botoes = rail.querySelectorAll(".nicho");
+  botoes.forEach(function(b){
+    b.addEventListener("click", function(){
+      botoes.forEach(function(o){ o.classList.toggle("on", o === b); });
+      const alvo = b.dataset.nicho;
+      track.querySelectorAll(".card").forEach(function(c){
+        c.hidden = alvo !== "todos" && c.dataset.nicho !== alvo;
+      });
+      track.scrollTo({ left:0, behavior:"smooth" });
+      medir();
+    });
+  });
+
   medir();
 });
 

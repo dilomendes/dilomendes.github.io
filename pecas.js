@@ -52,13 +52,21 @@ const FAIXAS = [
     id: "negocio",
     nome: "Vídeo pra negócio",
     sub: "Você manda a referência, recebe pronto. Sem gravar nada.",
+    /* subnichos: a faixa ganha filtro quando esta lista existe.
+       Peça nova só precisa do campo "nicho" batendo com um id daqui. */
+    nichos: [
+      { id: "arquitetura", nome: "Arquitetura" },
+      { id: "dj",          nome: "DJ e evento" },
+      { id: "imoveis",     nome: "Imóveis" },
+      { id: "anuncio",     nome: "Anúncios" }
+    ],
     pecas: [
-      { titulo: "Lafayette Studio", tags: ["humanização de projeto", "arquitetura", "antes e depois"], video: null, capa: null },
-      { titulo: "DJ Dubit", tags: ["recriação de ambiente", "evento", "30 segundos"], video: null, capa: null },
-      { titulo: "Prédio se construindo", tags: ["animação de obra", "tempo comprimido"], video: null, capa: null },
-      { titulo: "Corretora de imóveis", tags: ["avatar", "apresentadora IA", "360 de obra"], video: null, capa: null },
-      { titulo: "Telão do Sanches", tags: ["peça de evento", "formato telão"], video: null, capa: null },
-      { titulo: "Anúncio — cliente espanhol", tags: ["outro idioma", "anúncio"], video: null, capa: null }
+      { titulo: "Lafayette Studio", nicho: "arquitetura", tags: ["humanização de projeto", "antes e depois"], video: null, capa: null },
+      { titulo: "Prédio se construindo", nicho: "arquitetura", tags: ["animação de obra", "tempo comprimido"], video: null, capa: null },
+      { titulo: "DJ Dubit", nicho: "dj", tags: ["recriação de ambiente", "30 segundos"], video: null, capa: null },
+      { titulo: "Telão do Sanches", nicho: "dj", tags: ["peça de evento", "formato telão"], video: null, capa: null },
+      { titulo: "Corretora de imóveis", nicho: "imoveis", tags: ["avatar", "apresentadora IA", "360 de obra"], video: null, capa: null },
+      { titulo: "Anúncio — cliente espanhol", nicho: "anuncio", tags: ["outro idioma", "anúncio"], video: null, capa: null }
     ]
   },
   {

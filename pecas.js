@@ -86,10 +86,14 @@ const FAIXAS = [
   {
     id: "ugc",
     nome: "UGC de produto",
-    sub: "Vídeo de produto sem rosto e sem estúdio.",
+    sub: "Sem estúdio, sem rosto, sem o produto na mão. 33 peças entregues pra uma loja só — o processo caiu de 8 horas para 3 minutos por vídeo.",
     pecas: [
-      { titulo: "FEB Express — catálogo", tags: ["produto sem rosto", "e-commerce", "catálogo inteiro"], video: null, capa: null },
-      { titulo: "FEB Express — nova leva", tags: ["escala", "19 vídeos", "8h → 3min"], video: null, capa: null },
+      { titulo: "Impressora 3D", tags: ["demonstração", "produto técnico"], video: "videos/ugc-impressora.mp4", preview: "videos/ugc-impressora-prev.mp4", capa: "capas/ugc-impressora.jpg" },
+      { titulo: "Laser verde", tags: ["luz", "produto pequeno"], video: "videos/ugc-laser.mp4", preview: "videos/ugc-laser-prev.mp4", capa: "capas/ugc-laser.jpg" },
+      { titulo: "Máquina de lavar", tags: ["eletrodoméstico", "produto grande"], video: "videos/ugc-maq-lavar.mp4", preview: "videos/ugc-maq-lavar-prev.mp4", capa: "capas/ugc-maq-lavar.jpg" },
+      { titulo: "Modelador de cachos", tags: ["beleza", "produto em uso"], video: "videos/ugc-modelador.mp4", preview: "videos/ugc-modelador-prev.mp4", capa: "capas/ugc-modelador.jpg" },
+      { titulo: "Console de game", tags: ["eletrônico", "presente"], video: "videos/ugc-game.mp4", preview: "videos/ugc-game-prev.mp4", capa: "capas/ugc-game.jpg" },
+      { titulo: "Kit médico infantil", tags: ["infantil", "produto lúdico"], video: "videos/ugc-kit-medico.mp4", preview: "videos/ugc-kit-medico-prev.mp4", capa: "capas/ugc-kit-medico.jpg" },
       { titulo: "TikTok Shop", tags: ["anúncio", "6 produtos", "3 ângulos cada"], video: null, capa: null }
     ]
   }

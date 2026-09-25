@@ -83,6 +83,10 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 /* CARD */
 .card{flex:0 0 206px; scroll-snap-align:start; display:flex; flex-direction:column; gap:9px; min-width:0}
 .rail.lead .card{flex-basis:248px}
+/* peça filmada em deitado: card mais largo e quadro 16:9 */
+.card.wide{flex-basis:360px}
+.rail.lead .card.wide{flex-basis:400px}
+.card.wide .media{aspect-ratio:16/9}
 .media{position:relative; aspect-ratio:9/16; border-radius:6px; overflow:hidden; background:var(--surface); transition:transform .3s}
 .card.has-video .media{cursor:pointer}
 .card.has-video:hover .media{transform:scale(1.02)}
@@ -184,7 +188,7 @@ FAIXAS.forEach(function(faixa, i){
 
   faixa.pecas.forEach(function(p){
     const card = document.createElement("article");
-    card.className = "card" + (p.video ? " has-video" : "");
+    card.className = "card" + (p.video ? " has-video" : "") + (p.formato === "16:9" ? " wide" : "");
     const tags = p.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join("");
     const media = p.video
       ? '<div class="media"><video src="' + (p.preview || p.video) + '" ' + (p.capa ? 'poster="' + p.capa + '" ' : "") + 'muted loop playsinline preload="none"></video><span class="play-ico">' + ICON_PLAY + '</span></div>'

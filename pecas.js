@@ -77,7 +77,7 @@ const FAIXAS = [
     nome: "Curso e infoproduto",
     sub: "Aula gravada virando produto pronto pra vender.",
     pecas: [
-      { titulo: "Projeto 100K", tags: ["montagem de curso", "8 aulas", "R$5.297 no 1º mês"], video: null, capa: null }
+      { titulo: "Projeto 100K", formato: "16:9", tags: ["montagem de curso", "8 aulas", "R$5.297 no 1º mês"], video: null, capa: null }
     ]
   },
   {
@@ -85,10 +85,10 @@ const FAIXAS = [
     nome: "Conteúdo pra criador",
     sub: "Canal que precisa publicar toda semana.",
     pecas: [
-      { titulo: "Universidade do Intercâmbio", tags: ["vídeo diário", "react", "2 anos de canal"], video: null, capa: null },
-      { titulo: "Romariz — vídeo longo", tags: ["YouTube longo", "CTR 10,4%", "retenção"], video: null, capa: null },
+      { titulo: "Universidade do Intercâmbio", formato: "16:9", tags: ["vídeo diário", "react", "2 anos de canal"], video: null, capa: null },
+      { titulo: "Romariz — vídeo longo", formato: "16:9", tags: ["YouTube longo", "CTR 10,4%", "retenção"], video: null, capa: null },
       { titulo: "Laura", tags: ["reels recorrente", "humor", "fitness"], video: null, capa: null },
-      { titulo: "Cami", tags: ["YouTube", "IA dentro do corte real"], video: null, capa: null },
+      { titulo: "Cami", formato: "16:9", tags: ["YouTube", "IA dentro do corte real"], video: null, capa: null },
       { titulo: "Thamires", tags: ["BookTok", "decupagem", "lote"], video: null, capa: null },
       { titulo: "Pedro Medici", tags: ["nutrição", "trend", "storytelling"], video: null, capa: null },
       { titulo: "Rulquinho", tags: ["canal novo", "fitness"], video: null, capa: null }

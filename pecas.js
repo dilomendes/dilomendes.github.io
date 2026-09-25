@@ -41,13 +41,19 @@ const FAIXAS = [
     id: "personagens",
     nome: "Personagens",
     sub: "Manter o mesmo rosto de uma cena pra outra é onde quase todo mundo desiste.",
+    nichos: [
+      { id: "propria",   nome: "Criação própria" },
+      { id: "comercial", nome: "Comercial" },
+      { id: "musical",   nome: "Musical" },
+      { id: "real",      nome: "Personagem real" }
+    ],
     pecas: [
-      { titulo: "Leon Nayabing", tags: ["vitiligo consistente", "100% IA", "design de personagem"], video: "videos/person-leon.mp4", preview: "videos/person-leon-prev.mp4", capa: "capas/person-leon.jpg" },
-      { titulo: "Vitália", tags: ["criação de personagem", "sotaque e voz", "storytelling"], video: "videos/person-vitalia.mp4", preview: "videos/person-vitalia-prev.mp4", capa: "capas/person-vitalia.jpg" },
-      { titulo: "Cleitin", tags: ["personagem próprio", "feito na mão"], video: "videos/person-cleitin-01.mp4", preview: "videos/person-cleitin-01-prev.mp4", capa: "capas/person-cleitin-01.jpg" },
-      { titulo: "Cleitin — o Fusca", tags: ["mesmo personagem", "cenário novo", "episódio 2"], video: "videos/person-cleitin-fusca.mp4", preview: "videos/person-cleitin-fusca-prev.mp4", capa: "capas/person-cleitin-fusca.jpg" },
-      { titulo: "Cleitin — Boiben", tags: ["consistência entre episódios", "série", "episódio 3"], video: "videos/person-cleitin-boiben.mp4", preview: "videos/person-cleitin-boiben-prev.mp4", capa: "capas/person-cleitin-boiben.jpg" },
-      { titulo: "Vitório — o jogador", tags: ["animação", "pessoa real", "freela fechado"], video: "videos/person-vitorio.mp4", preview: "videos/person-vitorio-prev.mp4", capa: "capas/person-vitorio.jpg" }
+      { titulo: "Leon Nayabing", nicho: "musical", tags: ["vitiligo consistente", "100% IA", "design de personagem"], video: "videos/person-leon.mp4", preview: "videos/person-leon-prev.mp4", capa: "capas/person-leon.jpg" },
+      { titulo: "Vitália", nicho: "comercial", tags: ["criação de personagem", "sotaque e voz", "storytelling"], video: "videos/person-vitalia.mp4", preview: "videos/person-vitalia-prev.mp4", capa: "capas/person-vitalia.jpg" },
+      { titulo: "Cleitin", nicho: "propria", tags: ["personagem próprio", "feito na mão"], video: "videos/person-cleitin-01.mp4", preview: "videos/person-cleitin-01-prev.mp4", capa: "capas/person-cleitin-01.jpg" },
+      { titulo: "Cleitin — o Fusca", nicho: "propria", tags: ["mesmo personagem", "cenário novo", "episódio 2"], video: "videos/person-cleitin-fusca.mp4", preview: "videos/person-cleitin-fusca-prev.mp4", capa: "capas/person-cleitin-fusca.jpg" },
+      { titulo: "Cleitin — Boiben", nicho: "propria", tags: ["consistência entre episódios", "série", "episódio 3"], video: "videos/person-cleitin-boiben.mp4", preview: "videos/person-cleitin-boiben-prev.mp4", capa: "capas/person-cleitin-boiben.jpg" },
+      { titulo: "Vitório — o jogador", nicho: "real", tags: ["animação", "pessoa real", "freela fechado"], video: "videos/person-vitorio.mp4", preview: "videos/person-vitorio-prev.mp4", capa: "capas/person-vitorio.jpg" }
     ]
   },
   {
@@ -84,14 +90,20 @@ const FAIXAS = [
     id: "criador",
     nome: "Conteúdo pra criador",
     sub: "Canal que precisa publicar toda semana.",
+    nichos: [
+      { id: "youtube",    nome: "YouTube" },
+      { id: "instagram",  nome: "Instagram" },
+      { id: "consultoria", nome: "Consultoria" }
+    ],
     pecas: [
-      { titulo: "Universidade do Intercâmbio", formato: "16:9", tags: ["vídeo diário", "react", "2 anos de canal"], video: null, capa: null },
-      { titulo: "Romariz — vídeo longo", formato: "16:9", tags: ["YouTube longo", "CTR 10,4%", "retenção"], video: null, capa: null },
-      { titulo: "Laura", tags: ["reels recorrente", "humor", "fitness"], video: null, capa: null },
-      { titulo: "Cami", formato: "16:9", tags: ["YouTube", "IA dentro do corte real"], video: null, capa: null },
-      { titulo: "Thamires", tags: ["BookTok", "decupagem", "lote"], video: null, capa: null },
-      { titulo: "Pedro Medici", tags: ["nutrição", "trend", "storytelling"], video: null, capa: null },
-      { titulo: "Rulquinho", tags: ["canal novo", "fitness"], video: null, capa: null }
+      { titulo: "Pedro Medici — consultoria", nicho: "consultoria", tags: ["diagnóstico de perfil", "linha editorial", "posicionamento"], video: null, capa: null },
+      { titulo: "Universidade do Intercâmbio", nicho: "youtube", formato: "16:9", tags: ["vídeo diário", "react", "2 anos de canal"], video: null, capa: null },
+      { titulo: "Romariz — vídeo longo", nicho: "youtube", formato: "16:9", tags: ["YouTube longo", "CTR 10,4%", "retenção"], video: null, capa: null },
+      { titulo: "Laura", nicho: "instagram", tags: ["reels recorrente", "humor", "fitness"], video: null, capa: null },
+      { titulo: "Cami", nicho: "youtube", formato: "16:9", tags: ["YouTube", "IA dentro do corte real"], video: null, capa: null },
+      { titulo: "Thamires", nicho: "instagram", tags: ["BookTok", "decupagem", "lote"], video: null, capa: null },
+      { titulo: "Pedro Medici", nicho: "instagram", tags: ["nutrição", "trend", "storytelling"], video: null, capa: null },
+      { titulo: "Rulquinho", nicho: "instagram", tags: ["canal novo", "fitness"], video: null, capa: null }
     ]
   },
   {
@@ -104,8 +116,7 @@ const FAIXAS = [
       { titulo: "Máquina de lavar", tags: ["eletrodoméstico", "produto grande"], video: "videos/ugc-maq-lavar.mp4", preview: "videos/ugc-maq-lavar-prev.mp4", capa: "capas/ugc-maq-lavar.jpg" },
       { titulo: "Modelador de cachos", tags: ["beleza", "produto em uso"], video: "videos/ugc-modelador.mp4", preview: "videos/ugc-modelador-prev.mp4", capa: "capas/ugc-modelador.jpg" },
       { titulo: "Console de game", tags: ["eletrônico", "presente"], video: "videos/ugc-game.mp4", preview: "videos/ugc-game-prev.mp4", capa: "capas/ugc-game.jpg" },
-      { titulo: "Kit médico infantil", tags: ["infantil", "produto lúdico"], video: "videos/ugc-kit-medico.mp4", preview: "videos/ugc-kit-medico-prev.mp4", capa: "capas/ugc-kit-medico.jpg" },
-      { titulo: "TikTok Shop", tags: ["anúncio", "6 produtos", "3 ângulos cada"], video: null, capa: null }
+      { titulo: "Kit médico infantil", tags: ["infantil", "produto lúdico"], video: "videos/ugc-kit-medico.mp4", preview: "videos/ugc-kit-medico-prev.mp4", capa: "capas/ugc-kit-medico.jpg" }
     ]
   }
 ];

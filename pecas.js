@@ -42,10 +42,12 @@ const FAIXAS = [
     nome: "Personagens",
     sub: "Manter o mesmo rosto de uma cena pra outra é onde quase todo mundo desiste.",
     pecas: [
-      { titulo: "Leon Nayabing", tags: ["vitiligo consistente", "100% IA", "design de personagem"], video: null, capa: null },
-      { titulo: "Vitália", tags: ["criação de personagem", "sotaque e voz", "storytelling"], video: null, capa: null },
-      { titulo: "Cleitin", tags: ["personagem próprio", "série de 3", "consistência"], video: null, capa: null },
-      { titulo: "Vitório — o jogador", tags: ["animação", "pessoa real", "freela fechado"], video: null, capa: null }
+      { titulo: "Leon Nayabing", tags: ["vitiligo consistente", "100% IA", "design de personagem"], video: "videos/person-leon.mp4", preview: "videos/person-leon-prev.mp4", capa: "capas/person-leon.jpg" },
+      { titulo: "Vitália", tags: ["criação de personagem", "sotaque e voz", "storytelling"], video: "videos/person-vitalia.mp4", preview: "videos/person-vitalia-prev.mp4", capa: "capas/person-vitalia.jpg" },
+      { titulo: "Cleitin", tags: ["personagem próprio", "feito na mão"], video: "videos/person-cleitin-01.mp4", preview: "videos/person-cleitin-01-prev.mp4", capa: "capas/person-cleitin-01.jpg" },
+      { titulo: "Cleitin — o Fusca", tags: ["mesmo personagem", "cenário novo", "episódio 2"], video: "videos/person-cleitin-fusca.mp4", preview: "videos/person-cleitin-fusca-prev.mp4", capa: "capas/person-cleitin-fusca.jpg" },
+      { titulo: "Cleitin — Boiben", tags: ["consistência entre episódios", "série", "episódio 3"], video: "videos/person-cleitin-boiben.mp4", preview: "videos/person-cleitin-boiben-prev.mp4", capa: "capas/person-cleitin-boiben.jpg" },
+      { titulo: "Vitório — o jogador", tags: ["animação", "pessoa real", "freela fechado"], video: "videos/person-vitorio.mp4", preview: "videos/person-vitorio-prev.mp4", capa: "capas/person-vitorio.jpg" }
     ]
   },
   {

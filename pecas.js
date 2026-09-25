@@ -30,11 +30,11 @@ const FAIXAS = [
       { titulo: 'Kosky — "Luka Modrić"', tags: ["storytelling", "consistência de personagem", "3 registros visuais", "corte na batida"], video: "videos/cinema-kosky.mp4", preview: "videos/cinema-kosky-prev.mp4", capa: "capas/cinema-kosky.jpg" },
       { titulo: "Vila Fitness", tags: ["criação de personagem", "consistência", "storytelling", "vozes"], video: "videos/cinema-vila-fitness.mp4", preview: "videos/cinema-vila-fitness-prev.mp4", capa: "capas/cinema-vila-fitness.jpg" },
       { titulo: "Exército de Clones", tags: ["multiplicação de personagem", "comédia", "formato telejornal"], video: "videos/cinema-exercito-clones.mp4", preview: "videos/cinema-exercito-clones-prev.mp4", capa: "capas/cinema-exercito-clones.jpg" },
-      { titulo: "Mashup GTA × Racionais", tags: ["estética de jogo", "recriação de referência", "HUD"], video: null, capa: null },
-      { titulo: "MC Romântico", tags: ["clipe musical", "feito na mão"], video: null, capa: null },
-      { titulo: "Barbeiro — GTA San Andreas", tags: ["estética de jogo", "interface de game", "comércio local"], video: null, capa: null },
-      { titulo: '"Tá olhando o quê?"', tags: ["meme", "timing", "3,7 mi de views"], video: null, capa: null },
-      { titulo: "Murphis", tags: ["meme", "atualidade", "476 mil de views"], video: null, capa: null }
+      { titulo: "Mashup GTA × Racionais", tags: ["estética de jogo", "recriação de referência", "HUD"], video: "videos/cinema-navas-gta.mp4", preview: "videos/cinema-navas-gta-prev.mp4", capa: "capas/cinema-navas-gta.jpg" },
+      { titulo: "MC Romântico", tags: ["clipe musical", "feito na mão"], video: "videos/cinema-mc-romantico.mp4", preview: "videos/cinema-mc-romantico-prev.mp4", capa: "capas/cinema-mc-romantico.jpg" },
+      { titulo: "Barbeiro — GTA San Andreas", tags: ["estética de jogo", "interface de game", "comércio local"], video: "videos/cinema-barbeiro.mp4", preview: "videos/cinema-barbeiro-prev.mp4", capa: "capas/cinema-barbeiro.jpg" },
+      { titulo: '"Tá gravando o quê?"', tags: ["meme", "timing", "3,7 mi de views"], video: "videos/cinema-trevor.mp4", preview: "videos/cinema-trevor-prev.mp4", capa: "capas/cinema-trevor.jpg" },
+      { titulo: "Murphis", tags: ["meme", "atualidade", "476 mil de views"], video: "videos/cinema-diniz.mp4", preview: "videos/cinema-diniz-prev.mp4", capa: "capas/cinema-diniz.jpg" }
     ]
   },
   {
@@ -64,6 +64,7 @@ const FAIXAS = [
       { titulo: "Lafayette Studio", nicho: "arquitetura", tags: ["humanização de projeto", "antes e depois"], video: null, capa: null },
       { titulo: "Prédio se construindo", nicho: "arquitetura", tags: ["animação de obra", "tempo comprimido"], video: null, capa: null },
       { titulo: "DJ Dubit", nicho: "dj", tags: ["recriação de ambiente", "30 segundos"], video: null, capa: null },
+      { titulo: "Vinheta MENE", nicho: "dj", tags: ["motion", "logotipo animado", "loop de 5s"], video: "videos/negocio-mene.mp4", preview: "videos/negocio-mene-prev.mp4", capa: "capas/negocio-mene.jpg" },
       { titulo: "Telão do Sanches", nicho: "dj", tags: ["peça de evento", "formato telão"], video: null, capa: null },
       { titulo: "Corretora de imóveis", nicho: "imoveis", tags: ["avatar", "apresentadora IA", "360 de obra"], video: null, capa: null },
       { titulo: "Anúncio — cliente espanhol", nicho: "anuncio", tags: ["outro idioma", "anúncio"], video: null, capa: null }

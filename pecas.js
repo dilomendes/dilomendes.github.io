@@ -109,14 +109,37 @@ const FAIXAS = [
   {
     id: "ugc",
     nome: "UGC de produto",
-    sub: "Sem estúdio, sem rosto, sem o produto na mão. 33 peças entregues pra uma loja só — o processo caiu de 8 horas para 3 minutos por vídeo.",
+    sub: "Sem estúdio, sem rosto, sem o produto na mão. Catálogo inteiro de e-commerce em vídeo — o processo caiu de 8 horas para 3 minutos por peça.",
     pecas: [
       { titulo: "Impressora 3D", tags: ["demonstração", "produto técnico"], video: "videos/ugc-impressora.mp4", preview: "videos/ugc-impressora-prev.mp4", capa: "capas/ugc-impressora.jpg" },
       { titulo: "Laser verde", tags: ["luz", "produto pequeno"], video: "videos/ugc-laser.mp4", preview: "videos/ugc-laser-prev.mp4", capa: "capas/ugc-laser.jpg" },
       { titulo: "Máquina de lavar", tags: ["eletrodoméstico", "produto grande"], video: "videos/ugc-maq-lavar.mp4", preview: "videos/ugc-maq-lavar-prev.mp4", capa: "capas/ugc-maq-lavar.jpg" },
       { titulo: "Modelador de cachos", tags: ["beleza", "produto em uso"], video: "videos/ugc-modelador.mp4", preview: "videos/ugc-modelador-prev.mp4", capa: "capas/ugc-modelador.jpg" },
       { titulo: "Console de game", tags: ["eletrônico", "presente"], video: "videos/ugc-game.mp4", preview: "videos/ugc-game-prev.mp4", capa: "capas/ugc-game.jpg" },
-      { titulo: "Kit médico infantil", tags: ["infantil", "produto lúdico"], video: "videos/ugc-kit-medico.mp4", preview: "videos/ugc-kit-medico-prev.mp4", capa: "capas/ugc-kit-medico.jpg" }
+      { titulo: "Kit médico infantil", tags: ["infantil", "produto lúdico"], video: "videos/ugc-kit-medico.mp4", preview: "videos/ugc-kit-medico-prev.mp4", capa: "capas/ugc-kit-medico.jpg" },
+      { titulo: "Galáxia", tags: ["luz ambiente", "3 cenas"], video: "videos/ugc-galaxia.mp4", preview: "videos/ugc-galaxia-prev.mp4", capa: "capas/ugc-galaxia.jpg" },
+      { titulo: "Astronauta", tags: ["luminária", "presente"], video: "videos/ugc-astronauta.mp4", preview: "videos/ugc-astronauta-prev.mp4", capa: "capas/ugc-astronauta.jpg" },
+      { titulo: "Difusor", tags: ["aroma", "casa"], video: "videos/ugc-difusor.mp4", preview: "videos/ugc-difusor-prev.mp4", capa: "capas/ugc-difusor.jpg" },
+      { titulo: "Fita LED", tags: ["iluminação", "quarto"], video: "videos/ugc-fita-led.mp4", preview: "videos/ugc-fita-led-prev.mp4", capa: "capas/ugc-fita-led.jpg" },
+      { titulo: "Moon Lamp", tags: ["luminária", "decoração"], video: "videos/ugc-moon-lamp.mp4", preview: "videos/ugc-moon-lamp-prev.mp4", capa: "capas/ugc-moon-lamp.jpg" },
+      { titulo: "Sunset Lamp", tags: ["luz", "ambiente"], video: "videos/ugc-sunset-lamp.mp4", preview: "videos/ugc-sunset-lamp-prev.mp4", capa: "capas/ugc-sunset-lamp.jpg" },
+      { titulo: "Afiador de facas", tags: ["cozinha", "utensílio"], video: "videos/ugc-afiador.mp4", preview: "videos/ugc-afiador-prev.mp4", capa: "capas/ugc-afiador.jpg" },
+      { titulo: "Amassador de alho", tags: ["cozinha", "utensílio"], video: "videos/ugc-amassador-de-alho.mp4", preview: "videos/ugc-amassador-de-alho-prev.mp4", capa: "capas/ugc-amassador-de-alho.jpg" },
+      { titulo: "Aparador de pelos", tags: ["cuidado pessoal"], video: "videos/ugc-aparador-de-pelos.mp4", preview: "videos/ugc-aparador-de-pelos-prev.mp4", capa: "capas/ugc-aparador-de-pelos.jpg" },
+      { titulo: "Balança bluetooth", tags: ["fitness", "conectado"], video: "videos/ugc-balanca-bluetooth.mp4", preview: "videos/ugc-balanca-bluetooth-prev.mp4", capa: "capas/ugc-balanca-bluetooth.jpg" },
+      { titulo: "Balança digital", tags: ["cozinha", "precisão"], video: "videos/ugc-balanca-digital.mp4", preview: "videos/ugc-balanca-digital-prev.mp4", capa: "capas/ugc-balanca-digital.jpg" },
+      { titulo: "Barra magnética", tags: ["organização", "cozinha"], video: "videos/ugc-barra.mp4", preview: "videos/ugc-barra-prev.mp4", capa: "capas/ugc-barra.jpg" },
+      { titulo: "Bate clara inox", tags: ["cozinha", "utensílio"], video: "videos/ugc-bate-clara.mp4", preview: "videos/ugc-bate-clara-prev.mp4", capa: "capas/ugc-bate-clara.jpg" },
+      { titulo: "Jogo de talheres", tags: ["mesa", "kit"], video: "videos/ugc-talheres.mp4", preview: "videos/ugc-talheres-prev.mp4", capa: "capas/ugc-talheres.jpg" },
+      { titulo: "Abridor de vinhos", tags: ["kit", "presente"], video: "videos/ugc-abridor-de-vinho.mp4", preview: "videos/ugc-abridor-de-vinho-prev.mp4", capa: "capas/ugc-abridor-de-vinho.jpg" },
+      { titulo: "Kit corpo humano", tags: ["infantil", "educativo"], video: "videos/ugc-kit-corpo-humano.mp4", preview: "videos/ugc-kit-corpo-humano-prev.mp4", capa: "capas/ugc-kit-corpo-humano.jpg" },
+      { titulo: "Lança bolhas", tags: ["infantil", "brinquedo"], video: "videos/ugc-lanca-bolhas.mp4", preview: "videos/ugc-lanca-bolhas-prev.mp4", capa: "capas/ugc-lanca-bolhas.jpg" },
+      { titulo: "Mini mixer", tags: ["cozinha", "eletroportátil"], video: "videos/ugc-minimixer.mp4", preview: "videos/ugc-minimixer-prev.mp4", capa: "capas/ugc-minimixer.jpg" },
+      { titulo: "Moedor de temperos", tags: ["cozinha", "elétrico"], video: "videos/ugc-moedor.mp4", preview: "videos/ugc-moedor-prev.mp4", capa: "capas/ugc-moedor.jpg" },
+      { titulo: "Suporte inteligente", tags: ["acessório", "celular"], video: "videos/ugc-suporte.mp4", preview: "videos/ugc-suporte-prev.mp4", capa: "capas/ugc-suporte.jpg" },
+      { titulo: "Termômetro", tags: ["saúde", "infantil"], video: "videos/ugc-termometro.mp4", preview: "videos/ugc-termometro-prev.mp4", capa: "capas/ugc-termometro.jpg" },
+      { titulo: "Tesoura", tags: ["utensílio"], video: "videos/ugc-tesoura.mp4", preview: "videos/ugc-tesoura-prev.mp4", capa: "capas/ugc-tesoura.jpg" },
+      { titulo: "Xilofone", tags: ["infantil", "brinquedo"], video: "videos/ugc-xilofone.mp4", preview: "videos/ugc-xilofone-prev.mp4", capa: "capas/ugc-xilofone.jpg" }
     ]
   }
 ];

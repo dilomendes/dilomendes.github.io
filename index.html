@@ -103,6 +103,9 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 .lb{position:fixed; inset:0; z-index:100; background:rgba(5,5,5,.94); display:none; place-items:center; padding:20px}
 .lb[open]{display:grid}
 .lb video{max-height:88vh; max-width:min(480px,94vw); border-radius:8px; background:#000}
+.lb-frame{width:min(960px,94vw); aspect-ratio:16/9; max-height:86vh; border:0; border-radius:8px; background:#000}
+.media img{width:100%; height:100%; object-fit:cover}
+.selo{position:absolute; right:9px; top:9px; font-size:.58rem; font-weight:600; padding:3px 8px; border-radius:99px; background:rgba(10,10,10,.72); backdrop-filter:blur(6px); color:#fff}
 .lb-close{position:absolute; top:16px; right:18px; width:38px; height:38px; border-radius:99px; border:1px solid rgba(255,255,255,.22); background:transparent; color:#fff; cursor:pointer; display:grid; place-items:center}
 .lb-cap{position:absolute; left:0; right:0; bottom:20px; text-align:center; color:rgba(255,255,255,.6); font-size:.76rem}
 
@@ -188,15 +191,24 @@ FAIXAS.forEach(function(faixa, i){
 
   faixa.pecas.forEach(function(p){
     const card = document.createElement("article");
-    card.className = "card" + (p.video ? " has-video" : "") + (p.formato === "16:9" ? " wide" : "");
+    card.className = "card" + (p.video || p.youtube ? " has-video" : "") + (p.formato === "16:9" || p.youtube ? " wide" : "");
     const tags = p.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join("");
-    const media = p.video
-      ? '<div class="media"><video src="' + (p.preview || p.video) + '" ' + (p.capa ? 'poster="' + p.capa + '" ' : "") + 'muted loop playsinline preload="none"></video><span class="play-ico">' + ICON_PLAY + '</span></div>'
-      : '<div class="media"><span class="empty">em breve</span></div>';
+    let media;
+    if (p.youtube) {
+      const capa = p.capa || ("https://img.youtube.com/vi/" + p.youtube + "/maxresdefault.jpg");
+      media = '<div class="media"><img src="' + capa + '" alt="" loading="lazy">' +
+              '<span class="play-ico">' + ICON_PLAY + '</span><span class="selo">YouTube</span></div>';
+    } else if (p.video) {
+      media = '<div class="media"><video src="' + (p.preview || p.video) + '" ' + (p.capa ? 'poster="' + p.capa + '" ' : "") + 'muted loop playsinline preload="none"></video><span class="play-ico">' + ICON_PLAY + '</span></div>';
+    } else {
+      media = '<div class="media"><span class="empty">em breve</span></div>';
+    }
     card.innerHTML = media + '<span class="c-title">' + p.titulo + '</span><div class="tags">' + tags + '</div>';
     if (p.nicho) card.dataset.nicho = p.nicho;
 
-    if (p.video) {
+    if (p.youtube) {
+      card.querySelector(".media").addEventListener("click", function(){ abrir(p); });
+    } else if (p.video) {
       const vid = card.querySelector("video");
       card.addEventListener("mouseenter", function(){ card.classList.add("playing"); vid.play().catch(function(){}); });
       card.addEventListener("mouseleave", function(){ card.classList.remove("playing"); vid.pause(); vid.currentTime = 0; });
@@ -282,8 +294,29 @@ new IntersectionObserver(function(entradas){
 
 /* lightbox */
 const lb = document.getElementById("lb"), lbVideo = document.getElementById("lbVideo"), lbCap = document.getElementById("lbCap");
-function abrir(p){ lbVideo.src = p.video; lbCap.textContent = p.titulo; lb.setAttribute("open",""); lbVideo.play().catch(function(){}); }
-function fechar(){ lb.removeAttribute("open"); lbVideo.pause(); lbVideo.removeAttribute("src"); lbVideo.load(); }
+const lbFrame = document.createElement("iframe");
+lbFrame.className = "lb-frame";
+lbFrame.allow = "accelerometer; autoplay; encrypted-media; picture-in-picture";
+lbFrame.allowFullscreen = true;
+lbFrame.hidden = true;
+lb.insertBefore(lbFrame, lbCap);
+
+function abrir(p){
+  lbCap.textContent = p.titulo;
+  if (p.youtube) {
+    lbVideo.hidden = true; lbFrame.hidden = false;
+    lbFrame.src = "https://www.youtube-nocookie.com/embed/" + p.youtube + "?autoplay=1&rel=0";
+  } else {
+    lbFrame.hidden = true; lbVideo.hidden = false;
+    lbVideo.src = p.video; lbVideo.play().catch(function(){});
+  }
+  lb.setAttribute("open","");
+}
+function fechar(){
+  lb.removeAttribute("open");
+  lbVideo.pause(); lbVideo.removeAttribute("src"); lbVideo.load();
+  lbFrame.removeAttribute("src"); lbFrame.hidden = true; lbVideo.hidden = false;
+}
 document.getElementById("lbClose").addEventListener("click", fechar);
 lb.addEventListener("click", function(e){ if (e.target === lb) fechar(); });
 document.addEventListener("keydown", function(e){ if (e.key === "Escape" && lb.hasAttribute("open")) fechar(); });

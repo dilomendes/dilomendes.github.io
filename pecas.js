@@ -69,9 +69,9 @@ const FAIXAS = [
       { id: "anuncio",     nome: "Anúncios" }
     ],
     pecas: [
-      { titulo: "Lafayette Studio", nicho: "arquitetura", tags: ["humanização de projeto", "antes e depois"], video: null, capa: null },
+      { titulo: "Lafayette Studio", nicho: "arquitetura", tags: ["humanização de projeto", "antes e depois"], video: "videos/negocio-lafayette.mp4", preview: "videos/negocio-lafayette-prev.mp4", capa: "capas/negocio-lafayette.jpg" },
       { titulo: "Prédio se construindo", nicho: "arquitetura", tags: ["animação de obra", "tempo comprimido"], video: null, capa: null },
-      { titulo: "DJ Dubit", nicho: "dj", tags: ["recriação de ambiente", "30 segundos"], video: null, capa: null },
+      { titulo: "DJ Dubit", nicho: "dj", tags: ["recriação de ambiente", "30 segundos"], video: "videos/negocio-dubit.mp4", preview: "videos/negocio-dubit-prev.mp4", capa: "capas/negocio-dubit.jpg" },
       { titulo: "Vinheta MENE", nicho: "dj", tags: ["motion", "logotipo animado", "loop de 5s"], video: "videos/negocio-mene.mp4", preview: "videos/negocio-mene-prev.mp4", capa: "capas/negocio-mene.jpg" },
       { titulo: "Telão do Sanches", nicho: "dj", tags: ["peça de evento", "formato telão"], video: null, capa: null },
       { titulo: "Corretora de imóveis", nicho: "imoveis", tags: ["avatar", "apresentadora IA", "360 de obra"], video: null, capa: null },

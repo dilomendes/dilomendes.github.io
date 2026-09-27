@@ -67,11 +67,14 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 .arrow.grow{width:54px; height:54px; background:var(--ink); color:var(--bg); border-color:var(--ink)}
 .arrow.grow svg{width:22px; height:22px}
 
-/* filtro de subnicho */
-.nichos{display:flex; gap:5px; flex-wrap:wrap; margin-top:12px}
-.nicho{font-size:.7rem; font-weight:500; color:var(--ink-3); background:transparent; border:1px solid var(--line-2); border-radius:99px; padding:5px 12px; cursor:pointer; transition:all .18s}
-.nicho:hover{color:var(--ink); border-color:var(--ink-3)}
-.nicho.on{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+/* sub-linha: cada ramificação tem a própria fila */
+.sub{margin-top:22px}
+.sub-head{display:flex; align-items:center; justify-content:space-between; gap:12px}
+.sub-head h3{margin:0; font-size:.95rem; font-weight:600; color:var(--ink-2); letter-spacing:.01em}
+.sub-head .arrows .arrow{width:30px; height:30px}
+.sub-head .arrows .arrow svg{width:12px; height:12px}
+.sub-head .arrows .arrow.grow{width:46px; height:46px}
+.sub-head .arrows .arrow.grow svg{width:19px; height:19px}
 .card[hidden]{display:none}
 
 .rail-track{position:relative}
@@ -166,56 +169,82 @@ document.getElementById("contatoLinks").innerHTML =
 const nav = document.getElementById("nav");
 const main = document.getElementById("faixas");
 
+function montaCard(p){
+  const card = document.createElement("article");
+  card.className = "card" + (p.video || p.youtube ? " has-video" : "") + (p.formato === "16:9" || p.youtube ? " wide" : "");
+  const tags = p.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join("");
+  let media;
+  if (p.youtube) {
+    const capa = p.capa || ("https://img.youtube.com/vi/" + p.youtube + "/maxresdefault.jpg");
+    media = '<div class="media"><img src="' + capa + '" alt="" loading="lazy"><span class="play-ico">' + ICON_PLAY + '</span><span class="selo">YouTube</span></div>';
+  } else if (p.video) {
+    media = '<div class="media"><video src="' + (p.preview || p.video) + '" ' + (p.capa ? 'poster="' + p.capa + '" ' : "") + 'muted loop playsinline preload="none"></video><span class="play-ico">' + ICON_PLAY + '</span></div>';
+  } else {
+    media = '<div class="media"><span class="empty">em breve</span></div>';
+  }
+  card.innerHTML = media + '<span class="c-title">' + p.titulo + '</span><div class="tags">' + tags + '</div>';
+  if (p.youtube) {
+    card.querySelector(".media").addEventListener("click", function(){ abrir(p); });
+  } else if (p.video) {
+    const vid = card.querySelector("video");
+    card.addEventListener("mouseenter", function(){ card.classList.add("playing"); vid.play().catch(function(){}); });
+    card.addEventListener("mouseleave", function(){ card.classList.remove("playing"); vid.pause(); vid.currentTime = 0; });
+    card.querySelector(".media").addEventListener("click", function(){ abrir(p); });
+  }
+  return card;
+}
+
+function setas(id){
+  return '<div class="arrows">' +
+    '<button class="arrow" data-rail="' + id + '" data-dir="-1" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none"><path d="M15 5L8 12l7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
+    '<button class="arrow next" data-rail="' + id + '" data-dir="1" aria-label="Avançar"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>';
+}
+
 FAIXAS.forEach(function(faixa, i){
   const a = document.createElement("a");
-  a.className = "pill";
-  a.href = "#" + faixa.id;
-  a.textContent = faixa.nome;
+  a.className = "pill"; a.href = "#" + faixa.id; a.textContent = faixa.nome;
   nav.appendChild(a);
 
-  const railId = "t" + i;
   const sec = document.createElement("section");
   sec.className = "rail" + (faixa.destaque ? " lead" : "");
   sec.id = faixa.id;
-  sec.innerHTML =
-    '<div class="rail-head"><div><h2>' + faixa.nome + '</h2><p class="rail-sub">' + faixa.sub + '</p></div>' +
-    '<div class="arrows">' +
-    '<button class="arrow" data-rail="' + railId + '" data-dir="-1" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none"><path d="M15 5L8 12l7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-    '<button class="arrow next" data-rail="' + railId + '" data-dir="1" aria-label="Avançar"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-    '</div></div>' +
-    (faixa.nichos ? '<div class="nichos"><button class="nicho on" data-nicho="todos">Todos</button>' +
-      faixa.nichos.map(function(n){ return '<button class="nicho" data-nicho="' + n.id + '">' + n.nome + '</button>'; }).join("") + '</div>' : "") +
-    '<div class="rail-track"><div class="track" id="' + railId + '"></div></div>';
 
-  const track = sec.querySelector(".track");
-
-  faixa.pecas.forEach(function(p){
-    const card = document.createElement("article");
-    card.className = "card" + (p.video || p.youtube ? " has-video" : "") + (p.formato === "16:9" || p.youtube ? " wide" : "");
-    const tags = p.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join("");
-    let media;
-    if (p.youtube) {
-      const capa = p.capa || ("https://img.youtube.com/vi/" + p.youtube + "/maxresdefault.jpg");
-      media = '<div class="media"><img src="' + capa + '" alt="" loading="lazy">' +
-              '<span class="play-ico">' + ICON_PLAY + '</span><span class="selo">YouTube</span></div>';
-    } else if (p.video) {
-      media = '<div class="media"><video src="' + (p.preview || p.video) + '" ' + (p.capa ? 'poster="' + p.capa + '" ' : "") + 'muted loop playsinline preload="none"></video><span class="play-ico">' + ICON_PLAY + '</span></div>';
-    } else {
-      media = '<div class="media"><span class="empty">em breve</span></div>';
+  if (faixa.nichos) {
+    /* faixa com ramificações: cada uma vira a própria fila, assim
+       vertical não mistura com horizontal na mesma linha */
+    sec.innerHTML = '<div class="rail-head"><div><h2>' + faixa.nome + '</h2><p class="rail-sub">' + faixa.sub + '</p></div></div>';
+    faixa.nichos.forEach(function(n, j){
+      const pecas = faixa.pecas.filter(function(p){ return p.nicho === n.id; })
+        /* deitado junto com deitado, em pé junto com em pé: evita fila serrilhada */
+        .sort(function(x, y){ return (x.formato === "16:9" || x.youtube ? 1 : 0) - (y.formato === "16:9" || y.youtube ? 1 : 0); });
+      if (!pecas.length) return;
+      const id = "t" + i + "_" + j;
+      const bloco = document.createElement("div");
+      bloco.className = "sub";
+      bloco.innerHTML = '<div class="sub-head"><h3>' + n.nome + '</h3>' + setas(id) + '</div>' +
+                        '<div class="rail-track"><div class="track" id="' + id + '"></div></div>';
+      const t = bloco.querySelector(".track");
+      pecas.forEach(function(p){ t.appendChild(montaCard(p)); });
+      sec.appendChild(bloco);
+    });
+    const orfas = faixa.pecas.filter(function(p){ return !faixa.nichos.some(function(n){ return n.id === p.nicho; }); });
+    if (orfas.length) {
+      const id = "t" + i + "_x";
+      const bloco = document.createElement("div");
+      bloco.className = "sub";
+      bloco.innerHTML = '<div class="sub-head"><h3>Outros</h3>' + setas(id) + '</div>' +
+                        '<div class="rail-track"><div class="track" id="' + id + '"></div></div>';
+      const t = bloco.querySelector(".track");
+      orfas.forEach(function(p){ t.appendChild(montaCard(p)); });
+      sec.appendChild(bloco);
     }
-    card.innerHTML = media + '<span class="c-title">' + p.titulo + '</span><div class="tags">' + tags + '</div>';
-    if (p.nicho) card.dataset.nicho = p.nicho;
-
-    if (p.youtube) {
-      card.querySelector(".media").addEventListener("click", function(){ abrir(p); });
-    } else if (p.video) {
-      const vid = card.querySelector("video");
-      card.addEventListener("mouseenter", function(){ card.classList.add("playing"); vid.play().catch(function(){}); });
-      card.addEventListener("mouseleave", function(){ card.classList.remove("playing"); vid.pause(); vid.currentTime = 0; });
-      card.querySelector(".media").addEventListener("click", function(){ abrir(p); });
-    }
-    track.appendChild(card);
-  });
+  } else {
+    const id = "t" + i;
+    sec.innerHTML = '<div class="rail-head"><div><h2>' + faixa.nome + '</h2><p class="rail-sub">' + faixa.sub + '</p></div>' +
+                    setas(id) + '</div><div class="rail-track"><div class="track" id="' + id + '"></div></div>';
+    const t = sec.querySelector(".track");
+    faixa.pecas.forEach(function(p){ t.appendChild(montaCard(p)); });
+  }
 
   main.appendChild(sec);
 });
@@ -258,20 +287,6 @@ document.querySelectorAll(".track").forEach(function(track){
   track.addEventListener("mouseleave", function(){ next.classList.remove("grow"); });
   track.addEventListener("scroll", medir, { passive:true });
   window.addEventListener("resize", medir);
-
-  /* filtro de subnicho: some o que não é do nicho e remede as setas */
-  const botoes = rail.querySelectorAll(".nicho");
-  botoes.forEach(function(b){
-    b.addEventListener("click", function(){
-      botoes.forEach(function(o){ o.classList.toggle("on", o === b); });
-      const alvo = b.dataset.nicho;
-      track.querySelectorAll(".card").forEach(function(c){
-        c.hidden = alvo !== "todos" && c.dataset.nicho !== alvo;
-      });
-      track.scrollTo({ left:0, behavior:"smooth" });
-      medir();
-    });
-  });
 
   medir();
 });

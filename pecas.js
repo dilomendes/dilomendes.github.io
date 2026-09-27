@@ -34,6 +34,7 @@ const FAIXAS = [
       { titulo: "MC Romântico", tags: ["clipe musical", "feito na mão"], video: "videos/cinema-mc-romantico.mp4", preview: "videos/cinema-mc-romantico-prev.mp4", capa: "capas/cinema-mc-romantico.jpg" },
       { titulo: "Barbeiro — GTA San Andreas", tags: ["estética de jogo", "interface de game", "comércio local"], video: "videos/cinema-barbeiro.mp4", preview: "videos/cinema-barbeiro-prev.mp4", capa: "capas/cinema-barbeiro.jpg" },
       { titulo: '"Tá gravando o quê?"', tags: ["meme", "timing", "3,7 mi de views"], video: "videos/cinema-trevor.mp4", preview: "videos/cinema-trevor-prev.mp4", capa: "capas/cinema-trevor.jpg" },
+      { titulo: "Cami — o corte com IA", tags: ["IA dentro do corte real", "carro pegando fogo", "YouTube"], video: "videos/cinema-cami-ia.mp4", preview: "videos/cinema-cami-ia-prev.mp4", capa: "capas/cinema-cami-ia.jpg" },
       { titulo: "Murphis", tags: ["meme", "atualidade", "476 mil de views"], video: "videos/cinema-diniz.mp4", preview: "videos/cinema-diniz-prev.mp4", capa: "capas/cinema-diniz.jpg" }
     ]
   },
@@ -66,17 +67,30 @@ const FAIXAS = [
       { id: "arquitetura", nome: "Arquitetura" },
       { id: "dj",          nome: "DJ e evento" },
       { id: "imoveis",     nome: "Imóveis" },
-      { id: "anuncio",     nome: "Anúncios" }
+      { id: "anuncio",     nome: "Anúncios" },
+      { id: "local",       nome: "Comércio local" }
     ],
     pecas: [
       { titulo: "Lafayette Studio", nicho: "arquitetura", tags: ["humanização de projeto", "antes e depois"], video: "videos/negocio-lafayette.mp4", preview: "videos/negocio-lafayette-prev.mp4", capa: "capas/negocio-lafayette.jpg" },
       { titulo: "Lafayette — apartamento moderno", nicho: "arquitetura", youtube: "78q8cycmjNA", tags: ["filme de projeto", "interiores", "no canal"], video: null, capa: null },
-      { titulo: "Prédio se construindo", nicho: "arquitetura", tags: ["animação de obra", "tempo comprimido"], video: null, capa: null },
+      { titulo: "Alexandre — primeiro projeto", nicho: "arquitetura", formato: "16:9", tags: ["antes do Lafayette", "arquitetura", "primeiro teste"], video: "videos/negocio-alexandre.mp4", preview: "videos/negocio-alexandre-prev.mp4", capa: "capas/negocio-alexandre.jpg" },
+      { titulo: "Prédio se construindo", nicho: "arquitetura", tags: ["animação de obra", "tempo comprimido"], video: "videos/negocio-predio.mp4", preview: "videos/negocio-predio-prev.mp4", capa: "capas/negocio-predio.jpg" },
       { titulo: "DJ Dubit", nicho: "dj", tags: ["recriação de ambiente", "30 segundos"], video: "videos/negocio-dubit.mp4", preview: "videos/negocio-dubit-prev.mp4", capa: "capas/negocio-dubit.jpg" },
       { titulo: "Vinheta MENE", nicho: "dj", tags: ["motion", "logotipo animado", "loop de 5s"], video: "videos/negocio-mene.mp4", preview: "videos/negocio-mene-prev.mp4", capa: "capas/negocio-mene.jpg" },
       { titulo: "Telão do Sanches", nicho: "dj", tags: ["peça de evento", "formato telão"], video: null, capa: null },
       { titulo: "Corretora de imóveis", nicho: "imoveis", tags: ["avatar", "apresentadora IA", "360 de obra"], video: null, capa: null },
-      { titulo: "Anúncio — cliente espanhol", nicho: "anuncio", tags: ["outro idioma", "anúncio"], video: null, capa: null }
+      { titulo: "Anúncio — cliente espanhol", nicho: "anuncio", tags: ["outro idioma", "anúncio"], video: "videos/negocio-espanhol.mp4", preview: "videos/negocio-espanhol-prev.mp4", capa: "capas/negocio-espanhol.jpg" },
+      { titulo: "Estúdio de tatuagem — 01", nicho: "local", tags: ["reel", "sem VFX", "corte e ritmo"], video: "videos/negocio-tatuador-01.mp4", preview: "videos/negocio-tatuador-01-prev.mp4", capa: "capas/negocio-tatuador-01.jpg" },
+      { titulo: "Estúdio de tatuagem — 02", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-02.mp4", preview: "videos/negocio-tatuador-02-prev.mp4", capa: "capas/negocio-tatuador-02.jpg" },
+      { titulo: "Estúdio de tatuagem — 03", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-03.mp4", preview: "videos/negocio-tatuador-03-prev.mp4", capa: "capas/negocio-tatuador-03.jpg" },
+      { titulo: "Estúdio de tatuagem — 04", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-04.mp4", preview: "videos/negocio-tatuador-04-prev.mp4", capa: "capas/negocio-tatuador-04.jpg" },
+      { titulo: "Estúdio de tatuagem — 05", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-05.mp4", preview: "videos/negocio-tatuador-05-prev.mp4", capa: "capas/negocio-tatuador-05.jpg" },
+      { titulo: "Estúdio de tatuagem — 06", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-06.mp4", preview: "videos/negocio-tatuador-06-prev.mp4", capa: "capas/negocio-tatuador-06.jpg" },
+      { titulo: "Estúdio de tatuagem — 07", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-07.mp4", preview: "videos/negocio-tatuador-07-prev.mp4", capa: "capas/negocio-tatuador-07.jpg" },
+      { titulo: "Estúdio de tatuagem — 08", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-08.mp4", preview: "videos/negocio-tatuador-08-prev.mp4", capa: "capas/negocio-tatuador-08.jpg" },
+      { titulo: "Estúdio de tatuagem — 09", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-09.mp4", preview: "videos/negocio-tatuador-09-prev.mp4", capa: "capas/negocio-tatuador-09.jpg" },
+      { titulo: "Estúdio de tatuagem — 10", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-10.mp4", preview: "videos/negocio-tatuador-10-prev.mp4", capa: "capas/negocio-tatuador-10.jpg" },
+      { titulo: "Estúdio de tatuagem — 11", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-11.mp4", preview: "videos/negocio-tatuador-11-prev.mp4", capa: "capas/negocio-tatuador-11.jpg" }
     ]
   },
   {
@@ -102,7 +116,15 @@ const FAIXAS = [
       { titulo: "Técnicas para aprender inglês mais rápido", nicho: "youtube", youtube: "SJ80MToEqVc", tags: ["alta retenção", "storytelling"], video: null, capa: null },
       { titulo: "7 sites para ganhar em dólar de casa", nicho: "youtube", youtube: "4ffEafdg_5U", tags: ["formato viral", "teste de formato"], video: null, capa: null },
       { titulo: "Romariz — vídeo longo", nicho: "youtube", formato: "16:9", tags: ["YouTube longo", "CTR 10,4%", "retenção"], video: null, capa: null },
-      { titulo: "Laura", nicho: "instagram", tags: ["reels recorrente", "humor", "fitness"], video: null, capa: null },
+      { titulo: "VSL — maior canal de intercâmbio", nicho: "youtube", formato: "16:9", tags: ["VSL", "alta retenção", "+1,1M inscritos"], video: "videos/criador-vsl.mp4", preview: "videos/criador-vsl-prev.mp4", capa: "capas/criador-vsl.jpg" },
+      { titulo: "Animação de IA em vídeo diário", nicho: "youtube", formato: "16:9", tags: ["IA na edição", "conteúdo diário", "teste de formato"], video: "videos/criador-teste-ia.mp4", preview: "videos/criador-teste-ia-prev.mp4", capa: "capas/criador-teste-ia.jpg" },
+      { titulo: "João Bernardino — Projeto Eupresa", nicho: "youtube", youtube: "WaG-NyXhfM8", tags: ["negócio digital", "série"], video: null, capa: null },
+      { titulo: "Laura Erse — 01", nicho: "instagram", formato: "16:9", tags: ["fitness", "humor", "recorrente"], video: "videos/criador-laura-01.mp4", preview: "videos/criador-laura-01-prev.mp4", capa: "capas/criador-laura-01.jpg" },
+      { titulo: "Laura Erse — 02", nicho: "instagram", tags: ["fitness", "humor"], video: "videos/criador-laura-02.mp4", preview: "videos/criador-laura-02-prev.mp4", capa: "capas/criador-laura-02.jpg" },
+      { titulo: "Laura Erse — 03", nicho: "instagram", tags: ["fitness", "humor"], video: "videos/criador-laura-03.mp4", preview: "videos/criador-laura-03-prev.mp4", capa: "capas/criador-laura-03.jpg" },
+      { titulo: "Laura Erse — 04", nicho: "instagram", tags: ["fitness", "humor"], video: "videos/criador-laura-04.mp4", preview: "videos/criador-laura-04-prev.mp4", capa: "capas/criador-laura-04.jpg" },
+      { titulo: "Laura Erse — 05", nicho: "instagram", tags: ["fitness", "humor"], video: "videos/criador-laura-05.mp4", preview: "videos/criador-laura-05-prev.mp4", capa: "capas/criador-laura-05.jpg" },
+      { titulo: "Laura Erse — 06", nicho: "instagram", tags: ["fitness", "humor"], video: "videos/criador-laura-06.mp4", preview: "videos/criador-laura-06-prev.mp4", capa: "capas/criador-laura-06.jpg" },
       { titulo: "Camila Zanoni — Detroit, ep. 1", nicho: "youtube", youtube: "jlAlwUF0e_4", tags: ["gameplay narrativo", "YouTube longo"], video: null, capa: null },
       { titulo: "Camila Zanoni — vlog da F1", nicho: "youtube", youtube: "B9kNNWrh_4Q", tags: ["vlog", "corte de ritmo"], video: null, capa: null },
       { titulo: "Camila Zanoni — final da Libertadores", nicho: "youtube", youtube: "j2fJV6FEpyE", tags: ["vlog", "evento"], video: null, capa: null },

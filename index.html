@@ -117,9 +117,9 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 .lb-frame{width:min(960px,94vw); aspect-ratio:16/9; max-height:86vh; border:0; border-radius:8px; background:#000}
 .media img{width:100%; height:100%; object-fit:cover}
 .selo{position:absolute; right:9px; top:9px; font-size:.58rem; font-weight:600; padding:3px 8px; border-radius:99px; background:rgba(10,10,10,.72); backdrop-filter:blur(6px); color:#fff}
-.lb-grid{column-width:190px; column-gap:8px; width:min(900px,94vw); max-height:84vh; overflow:auto; padding:2px}
-@media (max-width:520px){.lb-grid{column-width:140px}}
-.lb-grid img{width:100%; display:block; border-radius:8px; background:#111; margin:0 0 8px; break-inside:avoid}
+.lb-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; width:min(880px,94vw); max-height:84vh; overflow-y:auto; overflow-x:hidden; padding:2px}
+@media (max-width:520px){.lb-grid{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}}
+.lb-grid img{width:100%; aspect-ratio:3/4; object-fit:contain; display:block; border-radius:8px; background:#111}
 .lb-close{position:absolute; top:16px; right:18px; width:38px; height:38px; border-radius:99px; border:1px solid rgba(255,255,255,.22); background:transparent; color:#fff; cursor:pointer; display:grid; place-items:center}
 .lb-cap{position:absolute; left:0; right:0; bottom:20px; text-align:center; color:rgba(255,255,255,.6); font-size:.76rem}
 
@@ -158,7 +158,7 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
   <p class="lb-cap" id="lbCap"></p>
 </div>
 
-<script src="pecas.js?v=20260927f"></script>
+<script src="pecas.js?v=20260927g"></script>
 <script>
 const ICON_GRID = '<svg viewBox="0 0 24 24" fill="none"><path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z" fill="currentColor"/></svg>';
 const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="none"><path d="M8 5l11 7-11 7V5Z" fill="currentColor"/></svg>';

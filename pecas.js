@@ -85,12 +85,6 @@ const FAIXAS = [
       { titulo: "Estúdio de tatuagem — 03", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-03.mp4", preview: "videos/negocio-tatuador-03-prev.mp4", capa: "capas/negocio-tatuador-03.jpg" },
       { titulo: "Estúdio de tatuagem — 04", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-04.mp4", preview: "videos/negocio-tatuador-04-prev.mp4", capa: "capas/negocio-tatuador-04.jpg" },
       { titulo: "Estúdio de tatuagem — 05", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-05.mp4", preview: "videos/negocio-tatuador-05-prev.mp4", capa: "capas/negocio-tatuador-05.jpg" },
-      { titulo: "Estúdio de tatuagem — 06", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-06.mp4", preview: "videos/negocio-tatuador-06-prev.mp4", capa: "capas/negocio-tatuador-06.jpg" },
-      { titulo: "Estúdio de tatuagem — 07", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-07.mp4", preview: "videos/negocio-tatuador-07-prev.mp4", capa: "capas/negocio-tatuador-07.jpg" },
-      { titulo: "Estúdio de tatuagem — 08", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-08.mp4", preview: "videos/negocio-tatuador-08-prev.mp4", capa: "capas/negocio-tatuador-08.jpg" },
-      { titulo: "Estúdio de tatuagem — 09", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-09.mp4", preview: "videos/negocio-tatuador-09-prev.mp4", capa: "capas/negocio-tatuador-09.jpg" },
-      { titulo: "Estúdio de tatuagem — 10", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-10.mp4", preview: "videos/negocio-tatuador-10-prev.mp4", capa: "capas/negocio-tatuador-10.jpg" },
-      { titulo: "Estúdio de tatuagem — 11", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-11.mp4", preview: "videos/negocio-tatuador-11-prev.mp4", capa: "capas/negocio-tatuador-11.jpg" }
     ]
   },
   {
@@ -98,7 +92,11 @@ const FAIXAS = [
     nome: "Curso e infoproduto",
     sub: "Aula gravada virando produto pronto pra vender.",
     pecas: [
-      { titulo: "Projeto 100K", formato: "16:9", tags: ["montagem de curso", "8 aulas", "R$5.297 no 1º mês"], video: null, capa: null }
+      { titulo: "Projeto 100K", formato: "16:9", tags: ["montagem de curso", "8 aulas", "R$5.297 no 1º mês"], video: null, capa: null },
+      { titulo: "Tree — abertura do curso", formato: "16:9", tags: ["vinheta", "identidade visual", "2022"], video: "videos/curso-tree-vinheta.mp4", preview: "videos/curso-tree-vinheta-prev.mp4", capa: "capas/curso-tree-vinheta.jpg" },
+      { titulo: "Tree — aula curta", formato: "16:9", tags: ["EAD", "diversidade", "Camtasia"], video: "videos/curso-tree-aula1.mp4", preview: "videos/curso-tree-aula1-prev.mp4", capa: "capas/curso-tree-aula1.jpg" },
+      { titulo: "Tree — aula completa", formato: "16:9", tags: ["EAD", "aula de 6 min"], video: "videos/curso-tree-aula2.mp4", preview: "videos/curso-tree-aula2-prev.mp4", capa: "capas/curso-tree-aula2.jpg" },
+      { titulo: "Tree — aula longa", formato: "16:9", tags: ["EAD", "aula de 10 min", "curso inteiro"], video: "videos/curso-tree-aula3.mp4", preview: "videos/curso-tree-aula3-prev.mp4", capa: "capas/curso-tree-aula3.jpg" }
     ]
   },
   {
@@ -108,7 +106,8 @@ const FAIXAS = [
     nichos: [
       { id: "youtube",    nome: "YouTube" },
       { id: "instagram",  nome: "Instagram" },
-      { id: "consultoria", nome: "Consultoria" }
+      { id: "consultoria", nome: "Consultoria" },
+      { id: "comunidade",  nome: "Comunidade" }
     ],
     pecas: [
       { titulo: "Pedro Medici — consultoria", nicho: "consultoria", tags: ["diagnóstico de perfil", "linha editorial", "posicionamento"], video: null, capa: null },
@@ -119,7 +118,7 @@ const FAIXAS = [
       { titulo: "VSL — maior canal de intercâmbio", nicho: "youtube", formato: "16:9", tags: ["VSL", "alta retenção", "+1,1M inscritos"], video: "videos/criador-vsl.mp4", preview: "videos/criador-vsl-prev.mp4", capa: "capas/criador-vsl.jpg" },
       { titulo: "Animação de IA em vídeo diário", nicho: "youtube", formato: "16:9", tags: ["IA na edição", "conteúdo diário", "teste de formato"], video: "videos/criador-teste-ia.mp4", preview: "videos/criador-teste-ia-prev.mp4", capa: "capas/criador-teste-ia.jpg" },
       { titulo: "João Bernardino — Projeto Eupresa", nicho: "youtube", youtube: "WaG-NyXhfM8", tags: ["negócio digital", "série"], video: null, capa: null },
-      { titulo: "Laura Erse — 01", nicho: "instagram", formato: "16:9", tags: ["fitness", "humor", "recorrente"], video: "videos/criador-laura-01.mp4", preview: "videos/criador-laura-01-prev.mp4", capa: "capas/criador-laura-01.jpg" },
+      { titulo: "Laura Erse — conteúdo de comunidade", nicho: "comunidade", formato: "16:9", tags: ["área de membros", "vídeo longo", "público fechado"], video: "videos/criador-laura-01.mp4", preview: "videos/criador-laura-01-prev.mp4", capa: "capas/criador-laura-01.jpg" },
       { titulo: "Laura Erse — 02", nicho: "instagram", tags: ["fitness", "humor"], video: "videos/criador-laura-02.mp4", preview: "videos/criador-laura-02-prev.mp4", capa: "capas/criador-laura-02.jpg" },
       { titulo: "Laura Erse — 03", nicho: "instagram", tags: ["fitness", "humor"], video: "videos/criador-laura-03.mp4", preview: "videos/criador-laura-03-prev.mp4", capa: "capas/criador-laura-03.jpg" },
       { titulo: "Laura Erse — 04", nicho: "instagram", tags: ["fitness", "humor"], video: "videos/criador-laura-04.mp4", preview: "videos/criador-laura-04-prev.mp4", capa: "capas/criador-laura-04.jpg" },

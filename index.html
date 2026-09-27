@@ -116,6 +116,8 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 .lb-frame{width:min(960px,94vw); aspect-ratio:16/9; max-height:86vh; border:0; border-radius:8px; background:#000}
 .media img{width:100%; height:100%; object-fit:cover}
 .selo{position:absolute; right:9px; top:9px; font-size:.58rem; font-weight:600; padding:3px 8px; border-radius:99px; background:rgba(10,10,10,.72); backdrop-filter:blur(6px); color:#fff}
+.lb-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; width:min(900px,94vw); max-height:84vh; overflow:auto; padding:2px}
+.lb-grid img{width:100%; display:block; border-radius:8px; background:#111}
 .lb-close{position:absolute; top:16px; right:18px; width:38px; height:38px; border-radius:99px; border:1px solid rgba(255,255,255,.22); background:transparent; color:#fff; cursor:pointer; display:grid; place-items:center}
 .lb-cap{position:absolute; left:0; right:0; bottom:20px; text-align:center; color:rgba(255,255,255,.6); font-size:.76rem}
 
@@ -156,6 +158,7 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 
 <script src="pecas.js"></script>
 <script>
+const ICON_GRID = '<svg viewBox="0 0 24 24" fill="none"><path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z" fill="currentColor"/></svg>';
 const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="none"><path d="M8 5l11 7-11 7V5Z" fill="currentColor"/></svg>';
 
 /* HERO */
@@ -178,19 +181,21 @@ const main = document.getElementById("faixas");
 
 function montaCard(p){
   const card = document.createElement("article");
-  card.className = "card" + (p.video || p.youtube ? " has-video" : "") + (p.formato === "16:9" || p.youtube ? " wide" : "");
+  card.className = "card" + (p.video || p.youtube || p.galeria ? " has-video" : "") + (p.formato === "16:9" || p.youtube ? " wide" : "");
   const tags = p.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join("");
   let media;
   if (p.youtube) {
     const capa = p.capa || ("https://img.youtube.com/vi/" + p.youtube + "/maxresdefault.jpg");
     media = '<div class="media"><img src="' + capa + '" alt="" loading="lazy"><span class="play-ico">' + ICON_PLAY + '</span><span class="selo">YouTube</span></div>';
+  } else if (p.galeria) {
+    media = '<div class="media"><img src="' + (p.capa || p.galeria[0]) + '" alt="" loading="lazy"><span class="play-ico">' + ICON_GRID + '</span><span class="selo">' + p.galeria.length + ' imagens</span></div>';
   } else if (p.video) {
     media = '<div class="media"><video src="' + (p.preview || p.video) + '" ' + (p.capa ? 'poster="' + p.capa + '" ' : "") + 'muted loop playsinline preload="none"></video><span class="play-ico">' + ICON_PLAY + '</span></div>';
   } else {
     media = '<div class="media"><span class="empty">em breve</span></div>';
   }
   card.innerHTML = media + '<span class="c-title">' + p.titulo + '</span><div class="tags">' + tags + '</div>';
-  if (p.youtube) {
+  if (p.youtube || p.galeria) {
     card.querySelector(".media").addEventListener("click", function(){ abrir(p); });
   } else if (p.video) {
     const vid = card.querySelector("video");
@@ -341,14 +346,21 @@ lbFrame.allow = "accelerometer; autoplay; encrypted-media; picture-in-picture";
 lbFrame.allowFullscreen = true;
 lbFrame.hidden = true;
 lb.insertBefore(lbFrame, lbCap);
+const lbGrid = document.createElement("div");
+lbGrid.className = "lb-grid";
+lbGrid.hidden = true;
+lb.insertBefore(lbGrid, lbCap);
 
 function abrir(p){
   lbCap.textContent = p.titulo;
-  if (p.youtube) {
-    lbVideo.hidden = true; lbFrame.hidden = false;
+  if (p.galeria) {
+    lbVideo.hidden = true; lbFrame.hidden = true; lbGrid.hidden = false;
+    lbGrid.innerHTML = p.galeria.map(function(src){ return '<img src="' + src + '" alt="" loading="lazy">'; }).join("");
+  } else if (p.youtube) {
+    lbGrid.hidden = true; lbVideo.hidden = true; lbFrame.hidden = false;
     lbFrame.src = "https://www.youtube-nocookie.com/embed/" + p.youtube + "?autoplay=1&rel=0";
   } else {
-    lbFrame.hidden = true; lbVideo.hidden = false;
+    lbGrid.hidden = true; lbFrame.hidden = true; lbVideo.hidden = false;
     lbVideo.src = p.video; lbVideo.play().catch(function(){});
   }
   lb.setAttribute("open","");
@@ -356,7 +368,8 @@ function abrir(p){
 function fechar(){
   lb.removeAttribute("open");
   lbVideo.pause(); lbVideo.removeAttribute("src"); lbVideo.load();
-  lbFrame.removeAttribute("src"); lbFrame.hidden = true; lbVideo.hidden = false;
+  lbFrame.removeAttribute("src"); lbFrame.hidden = true;
+  lbGrid.innerHTML = ""; lbGrid.hidden = true; lbVideo.hidden = false;
 }
 document.getElementById("lbClose").addEventListener("click", fechar);
 lb.addEventListener("click", function(e){ if (e.target === lb) fechar(); });

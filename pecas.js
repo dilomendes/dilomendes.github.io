@@ -71,7 +71,7 @@ const FAIXAS = [
       { titulo: "Prédio se construindo", nicho: "arquitetura", tags: ["animação de obra", "tempo comprimido"], video: "videos/negocio-predio.mp4", preview: "videos/negocio-predio-prev.mp4", capa: "capas/negocio-predio.jpg" },
       { titulo: "DJ Dubit", nicho: "dj", tags: ["recriação de ambiente", "30 segundos"], video: "videos/negocio-dubit.mp4", preview: "videos/negocio-dubit-prev.mp4", capa: "capas/negocio-dubit.jpg" },
       { titulo: "Vinheta MENE", nicho: "dj", tags: ["motion", "logotipo animado", "loop de 5s"], video: "videos/negocio-mene.mp4", preview: "videos/negocio-mene-prev.mp4", capa: "capas/negocio-mene.jpg" },
-      { titulo: "Telão do Sanches", nicho: "dj", tags: ["peça de evento", "formato telão"], video: null, capa: null },
+      { titulo: "Telão do Sanches", nicho: "dj", formato: "16:9", tags: ["peça de evento", "formato telão", "25 segundos"], video: "videos/negocio-sanches.mp4", preview: "videos/negocio-sanches-prev.mp4", capa: "capas/negocio-sanches.jpg" },
       { titulo: "Corretora de imóveis", nicho: "imoveis", tags: ["avatar", "apresentadora IA", "360 de obra"], video: null, capa: null },
       { titulo: "Anúncio — cliente espanhol", nicho: "anuncio", tags: ["outro idioma", "anúncio"], video: "videos/negocio-espanhol.mp4", preview: "videos/negocio-espanhol-prev.mp4", capa: "capas/negocio-espanhol.jpg" },
       { titulo: "Estúdio de tatuagem — 01", nicho: "local", tags: ["reel", "sem VFX", "corte e ritmo"], video: "videos/negocio-tatuador-01.mp4", preview: "videos/negocio-tatuador-01-prev.mp4", capa: "capas/negocio-tatuador-01.jpg" },
@@ -86,7 +86,8 @@ const FAIXAS = [
     nome: "Curso e infoproduto",
     sub: "Aula gravada virando produto pronto pra vender.",
     pecas: [
-      { titulo: "Projeto 100K", formato: "16:9", tags: ["montagem de curso", "8 aulas", "R$5.297 no 1º mês"], video: null, capa: null },
+      { titulo: "Projeto 100K — introdução", formato: "16:9", tags: ["abertura do curso", "8 aulas", "R$5.297 no 1º mês"], video: "videos/curso-100k-intro.mp4", preview: "videos/curso-100k-intro-prev.mp4", capa: "capas/curso-100k-intro.jpg" },
+      { titulo: "Projeto 100K — aula 1", formato: "16:9", tags: ["aula montada", "comportamento humano", "5 min"], video: "videos/curso-100k-aula1.mp4", preview: "videos/curso-100k-aula1-prev.mp4", capa: "capas/curso-100k-aula1.jpg" },
       { titulo: "Tree — abertura do curso", formato: "16:9", tags: ["vinheta", "identidade visual", "2022"], video: "videos/curso-tree-vinheta.mp4", preview: "videos/curso-tree-vinheta-prev.mp4", capa: "capas/curso-tree-vinheta.jpg" },
       { titulo: "Tree — aula curta", formato: "16:9", tags: ["EAD", "diversidade", "Camtasia"], video: "videos/curso-tree-aula1.mp4", preview: "videos/curso-tree-aula1-prev.mp4", capa: "capas/curso-tree-aula1.jpg" },
       { titulo: "Tree — aula completa", formato: "16:9", tags: ["EAD", "aula de 6 min"], video: "videos/curso-tree-aula2.mp4", preview: "videos/curso-tree-aula2-prev.mp4", capa: "capas/curso-tree-aula2.jpg" },
@@ -105,7 +106,7 @@ const FAIXAS = [
       { id: "pedro",     nome: "Pedro Medici" },
       { id: "joao",      nome: "João Bernardino" },
       { id: "thamires",  nome: "Thamires" },
-      { id: "rulquinho", nome: "Rulquinho" },
+      { id: "hulkinho",  nome: "Hulkinho" },
       { id: "testes",    nome: "Testes com IA" }
     ],
     pecas: [
@@ -113,7 +114,9 @@ const FAIXAS = [
       { titulo: "10 melhores países para estudar e trabalhar", nicho: "tomoto", youtube: "Mbm6aayT1bQ", tags: ["maior canal de intercâmbio do Brasil", "+1,1M inscritos", "formato lista"], video: null, capa: null },
       { titulo: "Técnicas para aprender inglês mais rápido", nicho: "tomoto", youtube: "SJ80MToEqVc", tags: ["alta retenção", "storytelling"], video: null, capa: null },
       { titulo: "7 sites para ganhar em dólar de casa", nicho: "tomoto", youtube: "4ffEafdg_5U", tags: ["formato viral", "teste de formato"], video: null, capa: null },
-      { titulo: "Romariz — vídeo longo", nicho: "romariz", formato: "16:9", tags: ["YouTube longo", "CTR 10,4%", "retenção"], video: null, capa: null },
+      { titulo: "Postando mais de 30 vídeos todo dia", nicho: "romariz", youtube: "jbpXyebS_8Y", tags: ["YouTube longo", "rotina de criador"], video: null, capa: null },
+      { titulo: "O brasileiro trocou a amante pelo delivery", nicho: "romariz", youtube: "_k2lLGXh480", tags: ["comentário de internet", "corte seco"], video: null, capa: null },
+      { titulo: "GTA VI: eu não esperava isso no trailer novo", nicho: "romariz", youtube: "L0rYQBz0LA4", tags: ["reação", "games"], video: null, capa: null },
       { titulo: "VSL — maior canal de intercâmbio", nicho: "tomoto", formato: "16:9", tags: ["VSL", "alta retenção", "+1,1M inscritos"], video: "videos/criador-vsl.mp4", preview: "videos/criador-vsl-prev.mp4", capa: "capas/criador-vsl.jpg" },
       { titulo: "Animação de IA em vídeo diário", nicho: "testes", formato: "16:9", tags: ["IA na edição", "conteúdo diário", "teste de formato"], video: "videos/criador-teste-ia.mp4", preview: "videos/criador-teste-ia-prev.mp4", capa: "capas/criador-teste-ia.jpg" },
       { titulo: "João Bernardino — Projeto Eupresa", nicho: "joao", youtube: "WaG-NyXhfM8", tags: ["negócio digital", "série"], video: null, capa: null },
@@ -126,9 +129,13 @@ const FAIXAS = [
       { titulo: "Camila Zanoni — vlog da F1", nicho: "cami", youtube: "B9kNNWrh_4Q", tags: ["vlog", "corte de ritmo"], video: null, capa: null },
       { titulo: "Camila Zanoni — final da Libertadores", nicho: "cami", youtube: "j2fJV6FEpyE", tags: ["vlog", "evento"], video: null, capa: null },
       { titulo: "Camila Zanoni — gameplay Valorant", nicho: "cami", youtube: "v0EZarGDWrE", tags: ["gameplay", "edição de reação"], video: null, capa: null },
-      { titulo: "Thamires", nicho: "thamires", tags: ["BookTok", "decupagem", "lote"], video: null, capa: null },
+      { titulo: "Thamires — trilogia, com spoilers", nicho: "thamires", tags: ["BookTok", "resenha", "com spoiler"], video: "videos/criador-thamires-01.mp4", preview: "videos/criador-thamires-01-prev.mp4", capa: "capas/criador-thamires-01.jpg" },
+      { titulo: "Thamires — eu me verei, com spoilers", nicho: "thamires", tags: ["BookTok", "resenha", "com spoiler"], video: "videos/criador-thamires-02.mp4", preview: "videos/criador-thamires-02-prev.mp4", capa: "capas/criador-thamires-02.jpg" },
+      { titulo: "Thamires — a boa sorte, sem spoiler", nicho: "thamires", tags: ["BookTok", "resenha", "sem spoiler"], video: "videos/criador-thamires-03.mp4", preview: "videos/criador-thamires-03-prev.mp4", capa: "capas/criador-thamires-03.jpg" },
+      { titulo: "Thamires — Amy Galo", nicho: "thamires", tags: ["BookTok", "resenha"], video: "videos/criador-thamires-04.mp4", preview: "videos/criador-thamires-04-prev.mp4", capa: "capas/criador-thamires-04.jpg" },
       { titulo: "Pedro Medici", nicho: "pedro", tags: ["nutrição", "trend", "storytelling"], video: null, capa: null },
-      { titulo: "Rulquinho", nicho: "rulquinho", tags: ["canal novo", "fitness"], video: null, capa: null }
+      { titulo: "Hulkinho — 01", nicho: "hulkinho", tags: ["formato viral", "canal novo"], video: "videos/criador-hulkinho-01.mp4", preview: "videos/criador-hulkinho-01-prev.mp4", capa: "capas/criador-hulkinho-01.jpg" },
+      { titulo: "Hulkinho — 03", nicho: "hulkinho", tags: ["canal novo", "corte e ritmo"], video: "videos/criador-hulkinho-03.mp4", preview: "videos/criador-hulkinho-03-prev.mp4", capa: "capas/criador-hulkinho-03.jpg" }
     ]
   },
   {

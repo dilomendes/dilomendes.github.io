@@ -72,7 +72,7 @@ const FAIXAS = [
       { titulo: "DJ Dubit", nicho: "dj", tags: ["recriação de ambiente", "30 segundos"], video: "videos/negocio-dubit.mp4", preview: "videos/negocio-dubit-prev.mp4", capa: "capas/negocio-dubit.jpg" },
       { titulo: "Vinheta MENE", nicho: "dj", tags: ["motion", "logotipo animado", "loop de 5s"], video: "videos/negocio-mene.mp4", preview: "videos/negocio-mene-prev.mp4", capa: "capas/negocio-mene.jpg" },
       { titulo: "Telão do Sanches", nicho: "dj", formato: "16:9", tags: ["peça de evento", "formato telão", "25 segundos"], video: "videos/negocio-sanches.mp4", preview: "videos/negocio-sanches-prev.mp4", capa: "capas/negocio-sanches.jpg" },
-      { titulo: "Corretora de imóveis", nicho: "imoveis", tags: ["avatar", "apresentadora IA", "360 de obra"], video: null, capa: null },
+      { titulo: "Corretora de imóveis", nicho: "imoveis", tags: ["avatar", "apresentadora IA", "mesma pessoa em 9 cenas"], galeria: ["capas/negocio-corretora-01.jpg", "capas/negocio-corretora-02.jpg", "capas/negocio-corretora-03.jpg", "capas/negocio-corretora-04.jpg", "capas/negocio-corretora-05.jpg", "capas/negocio-corretora-06.jpg", "capas/negocio-corretora-07.jpg", "capas/negocio-corretora-08.jpg", "capas/negocio-corretora-09.jpg"], capa: "capas/negocio-corretora.jpg", video: null },
       { titulo: "Anúncio — cliente espanhol", nicho: "anuncio", tags: ["outro idioma", "anúncio"], video: "videos/negocio-espanhol.mp4", preview: "videos/negocio-espanhol-prev.mp4", capa: "capas/negocio-espanhol.jpg" },
       { titulo: "Estúdio de tatuagem — 01", nicho: "local", tags: ["reel", "sem VFX", "corte e ritmo"], video: "videos/negocio-tatuador-01.mp4", preview: "videos/negocio-tatuador-01-prev.mp4", capa: "capas/negocio-tatuador-01.jpg" },
       { titulo: "Estúdio de tatuagem — 02", nicho: "local", tags: ["reel", "sem VFX"], video: "videos/negocio-tatuador-02.mp4", preview: "videos/negocio-tatuador-02-prev.mp4", capa: "capas/negocio-tatuador-02.jpg" },
@@ -110,7 +110,7 @@ const FAIXAS = [
       { id: "testes",    nome: "Testes com IA" }
     ],
     pecas: [
-      { titulo: "Pedro Medici — consultoria", nicho: "pedro", tags: ["diagnóstico de perfil", "linha editorial", "posicionamento"], video: null, capa: null },
+      { titulo: "Pedro Medici — lançamento da consultoria", nicho: "pedro", formato: "16:9", tags: ["marca e identidade", "6 relatórios em PDF", "sistema de operação", "do zero ao lançamento"], galeria: ["capas/pedro-consultoria-01.jpg", "capas/pedro-consultoria-02.jpg", "capas/pedro-consultoria-03.jpg", "capas/pedro-consultoria-04.jpg", "capas/pedro-consultoria-05.jpg", "capas/pedro-consultoria-06.jpg", "capas/pedro-consultoria-07.jpg", "capas/pedro-consultoria-08.jpg", "capas/pedro-consultoria-09.jpg"], capa: "capas/pedro-consultoria.jpg", video: null },
       { titulo: "10 melhores países para estudar e trabalhar", nicho: "tomoto", youtube: "Mbm6aayT1bQ", tags: ["maior canal de intercâmbio do Brasil", "+1,1M inscritos", "formato lista"], video: null, capa: null },
       { titulo: "Técnicas para aprender inglês mais rápido", nicho: "tomoto", youtube: "SJ80MToEqVc", tags: ["alta retenção", "storytelling"], video: null, capa: null },
       { titulo: "7 sites para ganhar em dólar de casa", nicho: "tomoto", youtube: "4ffEafdg_5U", tags: ["formato viral", "teste de formato"], video: null, capa: null },

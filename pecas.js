@@ -70,6 +70,7 @@ const FAIXAS = [
     ],
     pecas: [
       { titulo: "Lafayette Studio", nicho: "arquitetura", tags: ["humanização de projeto", "antes e depois"], video: "videos/negocio-lafayette.mp4", preview: "videos/negocio-lafayette-prev.mp4", capa: "capas/negocio-lafayette.jpg" },
+      { titulo: "Lafayette — apartamento moderno", nicho: "arquitetura", youtube: "78q8cycmjNA", tags: ["filme de projeto", "interiores", "no canal"], video: null, capa: null },
       { titulo: "Prédio se construindo", nicho: "arquitetura", tags: ["animação de obra", "tempo comprimido"], video: null, capa: null },
       { titulo: "DJ Dubit", nicho: "dj", tags: ["recriação de ambiente", "30 segundos"], video: "videos/negocio-dubit.mp4", preview: "videos/negocio-dubit-prev.mp4", capa: "capas/negocio-dubit.jpg" },
       { titulo: "Vinheta MENE", nicho: "dj", tags: ["motion", "logotipo animado", "loop de 5s"], video: "videos/negocio-mene.mp4", preview: "videos/negocio-mene-prev.mp4", capa: "capas/negocio-mene.jpg" },
@@ -97,10 +98,15 @@ const FAIXAS = [
     ],
     pecas: [
       { titulo: "Pedro Medici — consultoria", nicho: "consultoria", tags: ["diagnóstico de perfil", "linha editorial", "posicionamento"], video: null, capa: null },
-      { titulo: "Universidade do Intercâmbio", nicho: "youtube", formato: "16:9", tags: ["vídeo diário", "react", "2 anos de canal"], video: null, capa: null },
+      { titulo: "10 melhores países para estudar e trabalhar", nicho: "youtube", youtube: "Mbm6aayT1bQ", tags: ["maior canal de intercâmbio do Brasil", "+1,1M inscritos", "formato lista"], video: null, capa: null },
+      { titulo: "Técnicas para aprender inglês mais rápido", nicho: "youtube", youtube: "SJ80MToEqVc", tags: ["alta retenção", "storytelling"], video: null, capa: null },
+      { titulo: "7 sites para ganhar em dólar de casa", nicho: "youtube", youtube: "4ffEafdg_5U", tags: ["formato viral", "teste de formato"], video: null, capa: null },
       { titulo: "Romariz — vídeo longo", nicho: "youtube", formato: "16:9", tags: ["YouTube longo", "CTR 10,4%", "retenção"], video: null, capa: null },
       { titulo: "Laura", nicho: "instagram", tags: ["reels recorrente", "humor", "fitness"], video: null, capa: null },
-      { titulo: "Cami", nicho: "youtube", formato: "16:9", tags: ["YouTube", "IA dentro do corte real"], video: null, capa: null },
+      { titulo: "Camila Zanoni — Detroit, ep. 1", nicho: "youtube", youtube: "jlAlwUF0e_4", tags: ["gameplay narrativo", "YouTube longo"], video: null, capa: null },
+      { titulo: "Camila Zanoni — vlog da F1", nicho: "youtube", youtube: "B9kNNWrh_4Q", tags: ["vlog", "corte de ritmo"], video: null, capa: null },
+      { titulo: "Camila Zanoni — final da Libertadores", nicho: "youtube", youtube: "j2fJV6FEpyE", tags: ["vlog", "evento"], video: null, capa: null },
+      { titulo: "Camila Zanoni — gameplay Valorant", nicho: "youtube", youtube: "v0EZarGDWrE", tags: ["gameplay", "edição de reação"], video: null, capa: null },
       { titulo: "Thamires", nicho: "instagram", tags: ["BookTok", "decupagem", "lote"], video: null, capa: null },
       { titulo: "Pedro Medici", nicho: "instagram", tags: ["nutrição", "trend", "storytelling"], video: null, capa: null },
       { titulo: "Rulquinho", nicho: "instagram", tags: ["canal novo", "fitness"], video: null, capa: null }

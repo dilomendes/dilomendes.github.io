@@ -135,6 +135,7 @@ const FAIXAS = [
       { titulo: "Thamires — Amy Galo", nicho: "thamires", tags: ["BookTok", "resenha"], video: "videos/criador-thamires-04.mp4", preview: "videos/criador-thamires-04-prev.mp4", capa: "capas/criador-thamires-04.jpg" },
       { titulo: "Pedro Medici", nicho: "pedro", tags: ["nutrição", "trend", "storytelling"], video: null, capa: null },
       { titulo: "Hulkinho — 01", nicho: "hulkinho", tags: ["formato viral", "canal novo"], video: "videos/criador-hulkinho-01.mp4", preview: "videos/criador-hulkinho-01-prev.mp4", capa: "capas/criador-hulkinho-01.jpg" },
+      { titulo: "Hulkinho — 02", nicho: "hulkinho", tags: ["canal novo", "corte e ritmo"], video: "videos/criador-hulkinho-02.mp4", preview: "videos/criador-hulkinho-02-prev.mp4", capa: "capas/criador-hulkinho-02.jpg" },
       { titulo: "Hulkinho — 03", nicho: "hulkinho", tags: ["canal novo", "corte e ritmo"], video: "videos/criador-hulkinho-03.mp4", preview: "videos/criador-hulkinho-03-prev.mp4", capa: "capas/criador-hulkinho-03.jpg" }
     ]
   },

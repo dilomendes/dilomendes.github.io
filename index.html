@@ -67,6 +67,13 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 .arrow.grow{width:54px; height:54px; background:var(--ink); color:var(--bg); border-color:var(--ink)}
 .arrow.grow svg{width:22px; height:22px}
 
+/* pílulas de ramificação: escolhe qual fila aparece */
+.ramos{display:flex; gap:5px; flex-wrap:wrap; margin-top:14px}
+.ramo{font-size:.72rem; font-weight:500; color:var(--ink-3); background:transparent; border:1px solid var(--line-2); border-radius:99px; padding:6px 13px; cursor:pointer; transition:all .18s; font-family:inherit}
+.ramo:hover{color:var(--ink); border-color:var(--ink-3)}
+.ramo.on{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.sub[hidden]{display:none}
+
 /* sub-linha: cada ramificação tem a própria fila */
 .sub{margin-top:22px}
 .sub-head{display:flex; align-items:center; justify-content:space-between; gap:12px}
@@ -212,7 +219,7 @@ FAIXAS.forEach(function(faixa, i){
   if (faixa.nichos) {
     /* faixa com ramificações: cada uma vira a própria fila, assim
        vertical não mistura com horizontal na mesma linha */
-    sec.innerHTML = '<div class="rail-head"><div><h2>' + faixa.nome + '</h2><p class="rail-sub">' + faixa.sub + '</p></div></div>';
+    sec.innerHTML = '<div class="rail-head"><div><h2>' + faixa.nome + '</h2><p class="rail-sub">' + faixa.sub + '</p></div></div><div class="ramos"></div>';
     faixa.nichos.forEach(function(n, j){
       const pecas = faixa.pecas.filter(function(p){ return p.nicho === n.id; })
         /* deitado junto com deitado, em pé junto com em pé: evita fila serrilhada */
@@ -244,6 +251,25 @@ FAIXAS.forEach(function(faixa, i){
                     setas(id) + '</div><div class="rail-track"><div class="track" id="' + id + '"></div></div>';
     const t = sec.querySelector(".track");
     faixa.pecas.forEach(function(p){ t.appendChild(montaCard(p)); });
+  }
+
+  const ramos = sec.querySelector(".ramos");
+  if (ramos) {
+    const filas = [].slice.call(sec.querySelectorAll(".sub"));
+    filas.forEach(function(fila, k){
+      const b = document.createElement("button");
+      b.className = "ramo" + (k === 0 ? " on" : "");
+      b.type = "button";
+      b.textContent = fila.querySelector("h3").textContent;
+      b.addEventListener("click", function(){
+        ramos.querySelectorAll(".ramo").forEach(function(o){ o.classList.toggle("on", o === b); });
+        filas.forEach(function(f, m){ f.hidden = m !== k; });
+        window.dispatchEvent(new Event("resize"));
+      });
+      ramos.appendChild(b);
+      fila.hidden = k !== 0;
+      fila.querySelector("h3").hidden = true;
+    });
   }
 
   main.appendChild(sec);

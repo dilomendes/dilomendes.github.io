@@ -42,12 +42,6 @@ const FAIXAS = [
     id: "personagens",
     nome: "Personagens",
     sub: "Manter o mesmo rosto de uma cena pra outra é onde quase todo mundo desiste.",
-    nichos: [
-      { id: "propria",   nome: "Criação própria" },
-      { id: "comercial", nome: "Comercial" },
-      { id: "musical",   nome: "Musical" },
-      { id: "real",      nome: "Personagem real" }
-    ],
     pecas: [
       { titulo: "Leon Nayabing", nicho: "musical", tags: ["vitiligo consistente", "100% IA", "design de personagem"], video: "videos/person-leon.mp4", preview: "videos/person-leon-prev.mp4", capa: "capas/person-leon.jpg" },
       { titulo: "Vitália", nicho: "comercial", tags: ["criação de personagem", "sotaque e voz", "storytelling"], video: "videos/person-vitalia.mp4", preview: "videos/person-vitalia-prev.mp4", capa: "capas/person-vitalia.jpg" },
@@ -104,10 +98,13 @@ const FAIXAS = [
     nome: "Conteúdo pra criador",
     sub: "Canal que precisa publicar toda semana.",
     nichos: [
-      { id: "youtube",    nome: "YouTube" },
-      { id: "instagram",  nome: "Instagram" },
-      { id: "consultoria", nome: "Consultoria" },
-      { id: "comunidade",  nome: "Comunidade" }
+      { id: "youtube",     nome: "YouTube" },
+      { id: "laura",       nome: "Laura Erse" },
+      { id: "thamires",    nome: "Thamires" },
+      { id: "pedro",       nome: "Pedro Medici" },
+      { id: "rulquinho",   nome: "Rulquinho" },
+      { id: "comunidade",  nome: "Comunidade" },
+      { id: "consultoria", nome: "Consultoria" }
     ],
     pecas: [
       { titulo: "Pedro Medici — consultoria", nicho: "consultoria", tags: ["diagnóstico de perfil", "linha editorial", "posicionamento"], video: null, capa: null },
@@ -119,18 +116,17 @@ const FAIXAS = [
       { titulo: "Animação de IA em vídeo diário", nicho: "youtube", formato: "16:9", tags: ["IA na edição", "conteúdo diário", "teste de formato"], video: "videos/criador-teste-ia.mp4", preview: "videos/criador-teste-ia-prev.mp4", capa: "capas/criador-teste-ia.jpg" },
       { titulo: "João Bernardino — Projeto Eupresa", nicho: "youtube", youtube: "WaG-NyXhfM8", tags: ["negócio digital", "série"], video: null, capa: null },
       { titulo: "Laura Erse — conteúdo de comunidade", nicho: "comunidade", formato: "16:9", tags: ["área de membros", "vídeo longo", "público fechado"], video: "videos/criador-laura-01.mp4", preview: "videos/criador-laura-01-prev.mp4", capa: "capas/criador-laura-01.jpg" },
-      { titulo: "Laura Erse — 02", nicho: "instagram", tags: ["fitness", "humor"], video: "videos/criador-laura-02.mp4", preview: "videos/criador-laura-02-prev.mp4", capa: "capas/criador-laura-02.jpg" },
-      { titulo: "Laura Erse — 03", nicho: "instagram", tags: ["fitness", "humor"], video: "videos/criador-laura-03.mp4", preview: "videos/criador-laura-03-prev.mp4", capa: "capas/criador-laura-03.jpg" },
-      { titulo: "Laura Erse — 04", nicho: "instagram", tags: ["fitness", "humor"], video: "videos/criador-laura-04.mp4", preview: "videos/criador-laura-04-prev.mp4", capa: "capas/criador-laura-04.jpg" },
-      { titulo: "Laura Erse — 05", nicho: "instagram", tags: ["fitness", "humor"], video: "videos/criador-laura-05.mp4", preview: "videos/criador-laura-05-prev.mp4", capa: "capas/criador-laura-05.jpg" },
-      { titulo: "Laura Erse — 06", nicho: "instagram", tags: ["fitness", "humor"], video: "videos/criador-laura-06.mp4", preview: "videos/criador-laura-06-prev.mp4", capa: "capas/criador-laura-06.jpg" },
+      { titulo: "Laura Erse — 02", nicho: "laura", tags: ["fitness", "humor"], video: "videos/criador-laura-02.mp4", preview: "videos/criador-laura-02-prev.mp4", capa: "capas/criador-laura-02.jpg" },
+      { titulo: "Laura Erse — 03", nicho: "laura", tags: ["fitness", "humor"], video: "videos/criador-laura-03.mp4", preview: "videos/criador-laura-03-prev.mp4", capa: "capas/criador-laura-03.jpg" },
+      { titulo: "Laura Erse — 04", nicho: "laura", tags: ["fitness", "humor"], video: "videos/criador-laura-04.mp4", preview: "videos/criador-laura-04-prev.mp4", capa: "capas/criador-laura-04.jpg" },
+      { titulo: "Laura Erse — 05", nicho: "laura", tags: ["fitness", "humor"], video: "videos/criador-laura-05.mp4", preview: "videos/criador-laura-05-prev.mp4", capa: "capas/criador-laura-05.jpg" },
       { titulo: "Camila Zanoni — Detroit, ep. 1", nicho: "youtube", youtube: "jlAlwUF0e_4", tags: ["gameplay narrativo", "YouTube longo"], video: null, capa: null },
       { titulo: "Camila Zanoni — vlog da F1", nicho: "youtube", youtube: "B9kNNWrh_4Q", tags: ["vlog", "corte de ritmo"], video: null, capa: null },
       { titulo: "Camila Zanoni — final da Libertadores", nicho: "youtube", youtube: "j2fJV6FEpyE", tags: ["vlog", "evento"], video: null, capa: null },
       { titulo: "Camila Zanoni — gameplay Valorant", nicho: "youtube", youtube: "v0EZarGDWrE", tags: ["gameplay", "edição de reação"], video: null, capa: null },
-      { titulo: "Thamires", nicho: "instagram", tags: ["BookTok", "decupagem", "lote"], video: null, capa: null },
-      { titulo: "Pedro Medici", nicho: "instagram", tags: ["nutrição", "trend", "storytelling"], video: null, capa: null },
-      { titulo: "Rulquinho", nicho: "instagram", tags: ["canal novo", "fitness"], video: null, capa: null }
+      { titulo: "Thamires", nicho: "thamires", tags: ["BookTok", "decupagem", "lote"], video: null, capa: null },
+      { titulo: "Pedro Medici", nicho: "pedro", tags: ["nutrição", "trend", "storytelling"], video: null, capa: null },
+      { titulo: "Rulquinho", nicho: "rulquinho", tags: ["canal novo", "fitness"], video: null, capa: null }
     ]
   },
   {

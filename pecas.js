@@ -43,12 +43,13 @@ const FAIXAS = [
     nome: "Personagens",
     sub: "Manter o mesmo rosto de uma cena pra outra é onde quase todo mundo desiste.",
     pecas: [
-      { titulo: "Leon Nayabing", nicho: "musical", tags: ["vitiligo consistente", "100% IA", "design de personagem"], video: "videos/person-leon.mp4", preview: "videos/person-leon-prev.mp4", capa: "capas/person-leon.jpg" },
-      { titulo: "Vitália", nicho: "comercial", tags: ["criação de personagem", "sotaque e voz", "storytelling"], video: "videos/person-vitalia.mp4", preview: "videos/person-vitalia-prev.mp4", capa: "capas/person-vitalia.jpg" },
-      { titulo: "Cleitin", nicho: "propria", tags: ["personagem próprio", "feito na mão"], video: "videos/person-cleitin-01.mp4", preview: "videos/person-cleitin-01-prev.mp4", capa: "capas/person-cleitin-01.jpg" },
-      { titulo: "Cleitin — o Fusca", nicho: "propria", tags: ["mesmo personagem", "cenário novo", "episódio 2"], video: "videos/person-cleitin-fusca.mp4", preview: "videos/person-cleitin-fusca-prev.mp4", capa: "capas/person-cleitin-fusca.jpg" },
-      { titulo: "Cleitin — Boiben", nicho: "propria", tags: ["consistência entre episódios", "série", "episódio 3"], video: "videos/person-cleitin-boiben.mp4", preview: "videos/person-cleitin-boiben-prev.mp4", capa: "capas/person-cleitin-boiben.jpg" },
-      { titulo: "Vitório — o jogador", nicho: "real", tags: ["animação", "pessoa real", "freela fechado"], video: "videos/person-vitorio.mp4", preview: "videos/person-vitorio-prev.mp4", capa: "capas/person-vitorio.jpg" }
+      { titulo: "Leon Nayabing", tags: ["vitiligo consistente", "100% IA", "design de personagem"], video: "videos/person-leon.mp4", preview: "videos/person-leon-prev.mp4", capa: "capas/person-leon.jpg" },
+      { titulo: "Corretora de imóveis", tags: ["avatar", "mesma pessoa em 9 cenas", "apresentadora IA"], galeria: ["capas/negocio-corretora-01.jpg", "capas/negocio-corretora-02.jpg", "capas/negocio-corretora-03.jpg", "capas/negocio-corretora-04.jpg", "capas/negocio-corretora-05.jpg", "capas/negocio-corretora-06.jpg", "capas/negocio-corretora-07.jpg", "capas/negocio-corretora-08.jpg", "capas/negocio-corretora-09.jpg"], capa: "capas/negocio-corretora.jpg", video: null },
+      { titulo: "Cleitin", tags: ["personagem próprio", "feito na mão"], video: "videos/person-cleitin-01.mp4", preview: "videos/person-cleitin-01-prev.mp4", capa: "capas/person-cleitin-01.jpg" },
+      { titulo: "Vitália", tags: ["criação de personagem", "sotaque e voz", "storytelling"], video: "videos/person-vitalia.mp4", preview: "videos/person-vitalia-prev.mp4", capa: "capas/person-vitalia.jpg" },
+      { titulo: "Cleitin — o Fusca", tags: ["mesmo personagem", "cenário novo", "episódio 2"], video: "videos/person-cleitin-fusca.mp4", preview: "videos/person-cleitin-fusca-prev.mp4", capa: "capas/person-cleitin-fusca.jpg" },
+      { titulo: "Cleitin — Boiben", tags: ["consistência entre episódios", "série", "episódio 3"], video: "videos/person-cleitin-boiben.mp4", preview: "videos/person-cleitin-boiben-prev.mp4", capa: "capas/person-cleitin-boiben.jpg" },
+      { titulo: "Vitório — o jogador", tags: ["animação", "pessoa real", "freela fechado"], video: "videos/person-vitorio.mp4", preview: "videos/person-vitorio-prev.mp4", capa: "capas/person-vitorio.jpg" }
     ]
   },
   {

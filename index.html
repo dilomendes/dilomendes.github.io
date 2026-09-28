@@ -117,8 +117,10 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 .lb-frame{width:min(960px,94vw); aspect-ratio:16/9; max-height:86vh; border:0; border-radius:8px; background:#000}
 .media img{width:100%; height:100%; object-fit:cover}
 .selo{position:absolute; right:9px; top:9px; font-size:.58rem; font-weight:600; padding:3px 8px; border-radius:99px; background:rgba(10,10,10,.72); backdrop-filter:blur(6px); color:#fff}
+.grupo{margin:22px 0 2px; font-size:.72rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3)}
 .lb-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; width:min(880px,94vw); max-height:84vh; overflow-y:auto; overflow-x:hidden; padding:2px}
-@media (max-width:520px){.lb-grid{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}}
+@media (max-width:520px){.grupo{margin:22px 0 2px; font-size:.72rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3)}
+.lb-grid{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}}
 .lb-grid img{width:100%; aspect-ratio:3/4; object-fit:contain; display:block; border-radius:8px; background:#111}
 .lb-close{position:absolute; top:16px; right:18px; width:38px; height:38px; border-radius:99px; border:1px solid rgba(255,255,255,.22); background:transparent; color:#fff; cursor:pointer; display:grid; place-items:center}
 .lb-cap{position:absolute; left:0; right:0; bottom:20px; text-align:center; color:rgba(255,255,255,.6); font-size:.76rem}
@@ -158,7 +160,7 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
   <p class="lb-cap" id="lbCap"></p>
 </div>
 
-<script src="pecas.js?v=20260928c"></script>
+<script src="pecas.js?v=20260928d"></script>
 <script>
 const ICON_GRID = '<svg viewBox="0 0 24 24" fill="none"><path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z" fill="currentColor"/></svg>';
 const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="none"><path d="M8 5l11 7-11 7V5Z" fill="currentColor"/></svg>';
@@ -223,25 +225,65 @@ FAIXAS.forEach(function(faixa, i){
   sec.className = "rail" + (faixa.destaque ? " lead" : "");
   sec.id = faixa.id;
 
-  if (faixa.nichos) {
-    /* faixa com ramificações: cada uma vira a própria fila, assim
-       vertical não mistura com horizontal na mesma linha */
-    sec.innerHTML = '<div class="rail-head"><div><h2>' + faixa.nome + '</h2><p class="rail-sub">' + faixa.sub + '</p></div></div><div class="ramos"></div>';
-    faixa.nichos.forEach(function(n, j){
-      const pecas = faixa.pecas.filter(function(p){ return p.nicho === n.id; })
+  /* monta um bloco de ramificações: pílulas clicáveis + uma fila por ramo.
+     Usado tanto pela faixa simples (nichos) quanto por cada grupo (grupos). */
+  function montaRamos(destino, nichos, pecas, chave, titulo){
+    const ramos = document.createElement("div");
+    ramos.className = "ramos";
+    if (titulo) {
+      const h = document.createElement("h3");
+      h.className = "grupo";
+      h.textContent = titulo;
+      destino.appendChild(h);
+    }
+    destino.appendChild(ramos);
+    const filas = [];
+    nichos.forEach(function(n, j){
+      const lista = pecas.filter(function(p){ return p.nicho === n.id; })
         /* deitado junto com deitado, em pé junto com em pé: evita fila serrilhada */
         .sort(function(x, y){ return (x.formato === "16:9" || x.youtube ? 1 : 0) - (y.formato === "16:9" || y.youtube ? 1 : 0); });
-      if (!pecas.length) return;
-      const id = "t" + i + "_" + j;
+      if (!lista.length) return;
+      const id = "t" + chave + "_" + j;
       const bloco = document.createElement("div");
       bloco.className = "sub";
       bloco.innerHTML = '<div class="sub-head"><h3>' + n.nome + '</h3>' + setas(id) + '</div>' +
                         '<div class="rail-track"><div class="track" id="' + id + '"></div></div>';
       const t = bloco.querySelector(".track");
-      pecas.forEach(function(p){ t.appendChild(montaCard(p)); });
-      sec.appendChild(bloco);
+      lista.forEach(function(p){ t.appendChild(montaCard(p)); });
+      destino.appendChild(bloco);
+      filas.push(bloco);
     });
-    const orfas = faixa.pecas.filter(function(p){ return !faixa.nichos.some(function(n){ return n.id === p.nicho; }); });
+    filas.forEach(function(fila, k){
+      const b = document.createElement("button");
+      b.className = "ramo" + (k === 0 ? " on" : "");
+      b.type = "button";
+      b.textContent = fila.querySelector("h3").textContent;
+      b.addEventListener("click", function(){
+        ramos.querySelectorAll(".ramo").forEach(function(o){ o.classList.toggle("on", o === b); });
+        filas.forEach(function(f, m){ f.hidden = m !== k; });
+        window.dispatchEvent(new Event("resize"));
+      });
+      ramos.appendChild(b);
+      fila.hidden = k !== 0;
+      fila.querySelector("h3").hidden = true;
+    });
+    return filas.length;
+  }
+
+  if (faixa.grupos || faixa.nichos) {
+    sec.innerHTML = '<div class="rail-head"><div><h2>' + faixa.nome + '</h2><p class="rail-sub">' + faixa.sub + '</p></div></div>';
+    const usados = [];
+    if (faixa.grupos) {
+      /* dois níveis: a plataforma primeiro, o cliente dentro dela */
+      faixa.grupos.forEach(function(g, gi){
+        montaRamos(sec, g.nichos, faixa.pecas, i + "g" + gi, g.nome);
+        g.nichos.forEach(function(n){ usados.push(n.id); });
+      });
+    } else {
+      montaRamos(sec, faixa.nichos, faixa.pecas, "" + i, null);
+      faixa.nichos.forEach(function(n){ usados.push(n.id); });
+    }
+    const orfas = faixa.pecas.filter(function(p){ return usados.indexOf(p.nicho) === -1; });
     if (orfas.length) {
       const id = "t" + i + "_x";
       const bloco = document.createElement("div");
@@ -258,25 +300,6 @@ FAIXAS.forEach(function(faixa, i){
                     setas(id) + '</div><div class="rail-track"><div class="track" id="' + id + '"></div></div>';
     const t = sec.querySelector(".track");
     faixa.pecas.forEach(function(p){ t.appendChild(montaCard(p)); });
-  }
-
-  const ramos = sec.querySelector(".ramos");
-  if (ramos) {
-    const filas = [].slice.call(sec.querySelectorAll(".sub"));
-    filas.forEach(function(fila, k){
-      const b = document.createElement("button");
-      b.className = "ramo" + (k === 0 ? " on" : "");
-      b.type = "button";
-      b.textContent = fila.querySelector("h3").textContent;
-      b.addEventListener("click", function(){
-        ramos.querySelectorAll(".ramo").forEach(function(o){ o.classList.toggle("on", o === b); });
-        filas.forEach(function(f, m){ f.hidden = m !== k; });
-        window.dispatchEvent(new Event("resize"));
-      });
-      ramos.appendChild(b);
-      fila.hidden = k !== 0;
-      fila.querySelector("h3").hidden = true;
-    });
   }
 
   main.appendChild(sec);

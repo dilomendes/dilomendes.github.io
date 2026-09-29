@@ -119,9 +119,10 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 .selo{position:absolute; right:9px; top:9px; font-size:.58rem; font-weight:600; padding:3px 8px; border-radius:99px; background:rgba(10,10,10,.72); backdrop-filter:blur(6px); color:#fff}
 .grupo{margin:22px 0 2px; font-size:.72rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3)}
 .lb-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; width:min(880px,94vw); max-height:84vh; overflow-y:auto; overflow-x:hidden; padding:2px}
-@media (max-width:520px){.grupo{margin:22px 0 2px; font-size:.72rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3)}
-.lb-grid{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}}
+@media (max-width:520px){.lb-grid{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}}
 .lb-grid img{width:100%; aspect-ratio:3/4; object-fit:contain; display:block; border-radius:8px; background:#111}
+.lang{margin-left:auto; flex:0 0 auto; border:1px solid var(--linha); background:transparent; color:var(--ink-2); font:inherit; font-size:.68rem; font-weight:600; letter-spacing:.1em; padding:5px 10px; border-radius:99px; cursor:pointer}
+.lang:hover{color:var(--ink); border-color:var(--ink-3)}
 .lb-close{position:absolute; top:16px; right:18px; width:38px; height:38px; border-radius:99px; border:1px solid rgba(255,255,255,.22); background:transparent; color:#fff; cursor:pointer; display:grid; place-items:center}
 .lb-cap{position:absolute; left:0; right:0; bottom:20px; text-align:center; color:rgba(255,255,255,.6); font-size:.76rem}
 
@@ -139,6 +140,7 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
   <div class="topnav-inner">
     <span class="mark" id="mark"></span>
     <nav class="pills" id="nav"></nav>
+    <button class="lang" id="lang" type="button" aria-label="Language">EN</button>
   </div>
 </div>
 
@@ -160,20 +162,46 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
   <p class="lb-cap" id="lbCap"></p>
 </div>
 
-<script src="pecas.js?v=20260929a"></script>
+<script src="i18n.js?v=1"></script>
+<script src="pecas.js?v=20260929c"></script>
 <script>
+/* IDIOMA: português é a fonte; o inglês é uma camada por cima.
+   O que não estiver no i18n.js cai de volta pro português. */
+let LANG = (function(){
+  try { const g = localStorage.getItem("lang"); if (g) return g; } catch(e){}
+  return (navigator.language || "").toLowerCase().indexOf("pt") === 0 ? "pt" : "en";
+})();
+function D(){ return LANG === "pt" ? null : (I18N[LANG] || null); }
+function T(grupo, texto){
+  const d = D();
+  if (!d || !d[grupo]) return texto;
+  return d[grupo][texto] || texto;
+}
+function U(chave, texto){
+  const d = D();
+  return (d && d.ui && d.ui[chave]) || texto;
+}
+
 const ICON_GRID = '<svg viewBox="0 0 24 24" fill="none"><path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z" fill="currentColor"/></svg>';
 const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="none"><path d="M8 5l11 7-11 7V5Z" fill="currentColor"/></svg>';
+
+const OBS = [];
+function render(){
 
 /* HERO */
 document.getElementById("mark").textContent = PERFIL.nome;
 document.getElementById("hero").innerHTML =
   '<img class="avatar" src="' + PERFIL.foto + '" alt="' + PERFIL.nome + '" onerror="this.outerHTML=\'<div class=&quot;avatar-fb&quot;>FOTO</div>\'">' +
-  '<div><h1>' + PERFIL.nome + '</h1><p class="bio">' + PERFIL.bio + '</p>' +
+  '<div><h1>' + PERFIL.nome + '</h1><p class="bio">' + ((D() && D().bio) || PERFIL.bio) + '</p>' +
   '<div class="hero-links">' +
   '<a class="hlink" href="' + PERFIL.instagram + '" target="_blank" rel="noopener">' + PERFIL.arroba + '</a>' +
   '<a class="hlink" href="mailto:' + PERFIL.email + '">' + PERFIL.email + '</a>' +
   '</div></div>';
+
+document.querySelector("#contato h2").textContent = U("contatoTitulo", "Manda a referência");
+document.querySelector("#contato p").textContent = U("contatoSub", "Me diz o que você tem em mente. Eu produzo, você aprova.");
+document.querySelector(".foot").textContent = U("rodape", "Dilo · editando desde 2020");
+document.getElementById("lbClose").setAttribute("aria-label", U("fechar", "Fechar"));
 
 document.getElementById("contatoLinks").innerHTML =
   '<a class="hlink" href="' + PERFIL.instagram + '" target="_blank" rel="noopener">' + PERFIL.arroba + '</a>' +
@@ -186,19 +214,19 @@ const main = document.getElementById("faixas");
 function montaCard(p){
   const card = document.createElement("article");
   card.className = "card" + (p.video || p.youtube || p.galeria ? " has-video" : "") + (p.formato === "16:9" || p.youtube ? " wide" : "");
-  const tags = p.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join("");
+  const tags = p.tags.map(function(t){ return '<span class="tag">' + T("tags", t) + '</span>'; }).join("");
   let media;
   if (p.youtube) {
     const capa = p.capa || ("https://img.youtube.com/vi/" + p.youtube + "/maxresdefault.jpg");
     media = '<div class="media"><img src="' + capa + '" alt="" loading="lazy"><span class="play-ico">' + ICON_PLAY + '</span><span class="selo">YouTube</span></div>';
   } else if (p.galeria) {
-    media = '<div class="media"><img src="' + (p.capa || p.galeria[0]) + '" alt="" loading="lazy"><span class="play-ico">' + ICON_GRID + '</span><span class="selo">' + p.galeria.length + ' imagens</span></div>';
+    media = '<div class="media"><img src="' + (p.capa || p.galeria[0]) + '" alt="" loading="lazy"><span class="play-ico">' + ICON_GRID + '</span><span class="selo">' + p.galeria.length + ' ' + U("imagens", "imagens") + '</span></div>';
   } else if (p.video) {
     media = '<div class="media"><video src="' + (p.preview || p.video) + '" ' + (p.capa ? 'poster="' + p.capa + '" ' : "") + 'muted loop playsinline preload="none"></video><span class="play-ico">' + ICON_PLAY + '</span></div>';
   } else {
     media = '<div class="media"><span class="empty">em breve</span></div>';
   }
-  card.innerHTML = media + '<span class="c-title">' + p.titulo + '</span><div class="tags">' + tags + '</div>';
+  card.innerHTML = media + '<span class="c-title">' + T("titulos", p.titulo) + '</span><div class="tags">' + tags + '</div>';
   if (p.youtube || p.galeria) {
     card.querySelector(".media").addEventListener("click", function(){ abrir(p); });
   } else if (p.video) {
@@ -218,7 +246,8 @@ function setas(id){
 
 FAIXAS.forEach(function(faixa, i){
   const a = document.createElement("a");
-  a.className = "pill"; a.href = "#" + faixa.id; a.textContent = faixa.nome;
+  const tf = (D() && D().faixas && D().faixas[faixa.id]) || faixa;
+  a.className = "pill"; a.href = "#" + faixa.id; a.textContent = tf.nome || faixa.nome;
   nav.appendChild(a);
 
   const sec = document.createElement("section");
@@ -246,10 +275,11 @@ FAIXAS.forEach(function(faixa, i){
       const id = "t" + chave + "_" + j;
       const bloco = document.createElement("div");
       bloco.className = "sub";
-      bloco.innerHTML = '<div class="sub-head"><h3>' + n.nome + '</h3>' + setas(id) + '</div>' +
+      bloco.innerHTML = '<div class="sub-head"><h3>' + T("ramos", n.nome) + '</h3>' + setas(id) + '</div>' +
                         '<div class="rail-track"><div class="track" id="' + id + '"></div></div>';
       const t = bloco.querySelector(".track");
       lista.forEach(function(p){ t.appendChild(montaCard(p)); });
+      bloco.setAttribute("data-ramo", T("ramos", n.nome));
       destino.appendChild(bloco);
       filas.push(bloco);
     });
@@ -257,7 +287,7 @@ FAIXAS.forEach(function(faixa, i){
       const b = document.createElement("button");
       b.className = "ramo" + (k === 0 ? " on" : "");
       b.type = "button";
-      b.textContent = fila.querySelector("h3").textContent;
+      b.textContent = fila.getAttribute("data-ramo") || fila.querySelector("h3").textContent;
       b.addEventListener("click", function(){
         ramos.querySelectorAll(".ramo").forEach(function(o){ o.classList.toggle("on", o === b); });
         filas.forEach(function(f, m){ f.hidden = m !== k; });
@@ -271,7 +301,7 @@ FAIXAS.forEach(function(faixa, i){
   }
 
   if (faixa.grupos || faixa.nichos) {
-    sec.innerHTML = '<div class="rail-head"><div><h2>' + faixa.nome + '</h2><p class="rail-sub">' + faixa.sub + '</p></div></div>';
+    sec.innerHTML = '<div class="rail-head"><div><h2>' + (tf.nome || faixa.nome) + '</h2><p class="rail-sub">' + (tf.sub || faixa.sub) + '</p></div></div>';
     const usados = [];
     if (faixa.grupos) {
       /* dois níveis: a plataforma primeiro, o cliente dentro dela */
@@ -296,7 +326,7 @@ FAIXAS.forEach(function(faixa, i){
     }
   } else {
     const id = "t" + i;
-    sec.innerHTML = '<div class="rail-head"><div><h2>' + faixa.nome + '</h2><p class="rail-sub">' + faixa.sub + '</p></div>' +
+    sec.innerHTML = '<div class="rail-head"><div><h2>' + (tf.nome || faixa.nome) + '</h2><p class="rail-sub">' + (tf.sub || faixa.sub) + '</p></div>' +
                     setas(id) + '</div><div class="rail-track"><div class="track" id="' + id + '"></div></div>';
     const t = sec.querySelector(".track");
     faixa.pecas.forEach(function(p){ t.appendChild(montaCard(p)); });
@@ -306,7 +336,7 @@ FAIXAS.forEach(function(faixa, i){
 });
 
 const cPill = document.createElement("a");
-cPill.className = "pill"; cPill.href = "#contato"; cPill.textContent = "Contato";
+cPill.className = "pill"; cPill.href = "#contato"; cPill.textContent = U("contatoPill", "Contato");
 nav.appendChild(cPill);
 
 /* setas */
@@ -347,21 +377,40 @@ document.querySelectorAll(".track").forEach(function(track){
   medir();
 });
 
-/* nav ativa conforme rola */
-const secs = [].slice.call(document.querySelectorAll(".rail, .closing"));
+/* nav ativa conforme rola — os observadores antigos saem antes,
+   senao cada troca de idioma deixaria um jogo novo pendurado */
+OBS.forEach(function(o){ o.disconnect(); });
+OBS.length = 0;
 const pills = [].slice.call(document.querySelectorAll(".pill"));
-new IntersectionObserver(function(entradas){
-  entradas.forEach(function(e){
-    if (!e.isIntersecting) return;
-    pills.forEach(function(p){ p.classList.toggle("on", p.getAttribute("href") === "#" + e.target.id); });
-  });
-}, { rootMargin:"-45% 0px -50% 0px" }).observe ? secs.forEach(function(s){
-  new IntersectionObserver(function(entradas){
+[].slice.call(document.querySelectorAll(".rail, .closing")).forEach(function(s){
+  const o = new IntersectionObserver(function(entradas){
     entradas.forEach(function(e){
       if (e.isIntersecting) pills.forEach(function(p){ p.classList.toggle("on", p.getAttribute("href") === "#" + e.target.id); });
     });
-  }, { rootMargin:"-45% 0px -50% 0px" }).observe(s);
-}) : null;
+  }, { rootMargin:"-45% 0px -50% 0px" });
+  o.observe(s);
+  OBS.push(o);
+});
+
+}  /* fim do render */
+
+render();
+
+/* troca de idioma: limpa e remonta */
+const btLang = document.getElementById("lang");
+function pintaBotao(){
+  btLang.textContent = LANG === "pt" ? "EN" : "PT";
+  document.documentElement.lang = LANG === "pt" ? "pt-BR" : "en";
+}
+pintaBotao();
+btLang.addEventListener("click", function(){
+  LANG = LANG === "pt" ? "en" : "pt";
+  try { localStorage.setItem("lang", LANG); } catch(e){}
+  pintaBotao();
+  document.getElementById("nav").innerHTML = "";
+  document.getElementById("faixas").innerHTML = "";
+  render();
+});
 
 /* lightbox */
 const lb = document.getElementById("lb"), lbVideo = document.getElementById("lbVideo"), lbCap = document.getElementById("lbCap");
@@ -377,7 +426,7 @@ lbGrid.hidden = true;
 lb.insertBefore(lbGrid, lbCap);
 
 function abrir(p){
-  lbCap.textContent = p.titulo + (p.trecho ? "  ·  trecho de 30s" : "");
+  lbCap.textContent = T("titulos", p.titulo) + (p.trecho ? "  ·  " + U("trecho", "trecho de 30s") : "");
   if (p.galeria) {
     lbVideo.hidden = true; lbFrame.hidden = true; lbGrid.hidden = false;
     lbGrid.innerHTML = p.galeria.map(function(src){ return '<img src="' + src + '" alt="" loading="lazy">'; }).join("");

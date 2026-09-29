@@ -75,6 +75,7 @@ const FAIXAS = [
       { titulo: "Roza — anúncio", nicho: "imoveis", tags: ["corretora de imóveis", "anúncio", "vertical"], video: "videos/negocio-roza.mp4", preview: "videos/negocio-roza-prev.mp4", capa: "capas/negocio-roza.jpg" },
       { titulo: "Apresentação de imóvel", nicho: "imoveis", tags: ["corretor", "tour do imóvel"], trecho: true, video: "videos/negocio-pc-imovel.mp4", preview: "videos/negocio-pc-imovel-prev.mp4", capa: "capas/negocio-pc-imovel.jpg" },
       { titulo: "Anúncio — cliente espanhol", nicho: "anuncio", tags: ["outro idioma", "anúncio"], trecho: true, video: "videos/negocio-espanhol.mp4", preview: "videos/negocio-espanhol-prev.mp4", capa: "capas/negocio-espanhol.jpg" },
+      { titulo: "VSL — maior canal de intercâmbio", nicho: "anuncio", formato: "16:9", tags: ["VSL", "alta retenção", "+1,1M inscritos"], trecho: true, video: "videos/criador-vsl.mp4", preview: "videos/criador-vsl-prev.mp4", capa: "capas/criador-vsl.jpg" },
       { titulo: "PYMES", nicho: "anuncio", tags: ["anúncio", "vertical"], trecho: true, video: "videos/negocio-pymes.mp4", preview: "videos/negocio-pymes-prev.mp4", capa: "capas/negocio-pymes.jpg" },
       { titulo: "Luana — notícia local", nicho: "anuncio", trecho: true, tags: ["narração com IA", "montagem de notícias", "pauta de cidade"], video: "videos/negocio-luana.mp4", preview: "videos/negocio-luana-prev.mp4", capa: "capas/negocio-luana.jpg" },
       { titulo: "Shake — objetos falantes", nicho: "anuncio", tags: ["objetos falantes", "venda de produto"], video: "videos/negocio-shake.mp4", preview: "videos/negocio-shake-prev.mp4", capa: "capas/negocio-shake.jpg" },
@@ -89,7 +90,7 @@ const FAIXAS = [
       { id: "tree", nome: "Tree" }
     ],
     pecas: [
-      { titulo: "Projeto 100K — introdução", nicho: "roma", formato: "16:9", tags: ["abertura do curso", "8 aulas", "R$5.297 no 1º mês"], trecho: true, video: "videos/curso-100k-intro.mp4", preview: "videos/curso-100k-intro-prev.mp4", capa: "capas/curso-100k-intro.jpg" },
+      { titulo: "Projeto 100K — introdução", nicho: "roma", formato: "16:9", tags: ["abertura do curso", "8 aulas", "montagem completa"], trecho: true, video: "videos/curso-100k-intro.mp4", preview: "videos/curso-100k-intro-prev.mp4", capa: "capas/curso-100k-intro.jpg" },
       { titulo: "Projeto 100K — aula 1", nicho: "roma", formato: "16:9", tags: ["aula montada", "comportamento humano", "5 min"], trecho: true, video: "videos/curso-100k-aula1.mp4", preview: "videos/curso-100k-aula1-prev.mp4", capa: "capas/curso-100k-aula1.jpg" },
       { titulo: "Tree — abertura do curso", nicho: "tree", formato: "16:9", tags: ["vinheta", "identidade visual", "diversidade e inclusão"], video: "videos/curso-tree-vinheta.mp4", preview: "videos/curso-tree-vinheta-prev.mp4", capa: "capas/curso-tree-vinheta.jpg" },
       { titulo: "Tree — aula curta", nicho: "tree", formato: "16:9", tags: ["EAD", "diversidade e inclusão", "Camtasia"], trecho: true, video: "videos/curso-tree-aula1.mp4", preview: "videos/curso-tree-aula1-prev.mp4", capa: "capas/curso-tree-aula1.jpg" },
@@ -104,36 +105,35 @@ const FAIXAS = [
     /* dois níveis: primeiro a plataforma, depois o cliente dentro dela */
     grupos: [
       { nome: "YouTube", nichos: [
-        { id: "tomoto",  nome: "Matheus Tomoto" },
-        { id: "romariz", nome: "Romariz" },
         { id: "cami",    nome: "Camila Zanoni" },
-        { id: "joao",    nome: "João Bernardino" },
-        { id: "eloa",    nome: "Eloa" },
-        { id: "vini",    nome: "Vini Patrick" }
+        { id: "romariz", nome: "Romariz" },
+        { id: "tomoto",  nome: "Matheus Tomoto" },
+        { id: "vini",    nome: "Vini Patrick" },
+        { id: "eloa",    nome: "Eloá" },
+        { id: "joao",    nome: "João Bernardino" }
       ] },
       { nome: "Instagram / TikTok", nichos: [
         { id: "pedro",    nome: "Pedro Medici" },
+        { id: "tatudor",  nome: "Dom Tatudor" },
         { id: "laura",    nome: "Laura Erse" },
         { id: "thamires", nome: "Thamires" },
-        { id: "hulkinho", nome: "Hulkinho" },
-        { id: "tatudor",  nome: "Dom Tatudor" },
-        { id: "khalil",   nome: "Khalil" },
         { id: "babea",    nome: "Babea" },
-        { id: "cortes",   nome: "Show de bola Clips" }
+        { id: "hulkinho", nome: "Hulkinho" },
+        { id: "cortes",   nome: "Show de bola Clips" },
+        { id: "khalil",   nome: "Khalil" }
       ] }
     ],
     pecas: [
       { titulo: "10 melhores países para estudar e trabalhar", nicho: "tomoto", youtube: "Mbm6aayT1bQ", tags: ["maior canal de intercâmbio do Brasil", "+1,1M inscritos", "formato lista"], video: null, capa: null },
       { titulo: "Técnicas para aprender inglês mais rápido", nicho: "tomoto", youtube: "SJ80MToEqVc", tags: ["alta retenção", "storytelling"], video: null, capa: null },
       { titulo: "7 sites para ganhar em dólar de casa", nicho: "tomoto", youtube: "4ffEafdg_5U", tags: ["formato viral", "teste de formato"], video: null, capa: null },
-      { titulo: "VSL — maior canal de intercâmbio", nicho: "tomoto", formato: "16:9", tags: ["VSL", "alta retenção", "+1,1M inscritos"], trecho: true, video: "videos/criador-vsl.mp4", preview: "videos/criador-vsl-prev.mp4", capa: "capas/criador-vsl.jpg" },
       { titulo: "Postando mais de 30 vídeos todo dia", nicho: "romariz", youtube: "jbpXyebS_8Y", tags: ["YouTube longo", "rotina de criador"], video: null, capa: null },
       { titulo: "O brasileiro trocou a amante pelo delivery", nicho: "romariz", youtube: "_k2lLGXh480", tags: ["comentário de internet", "corte seco"], video: null, capa: null },
       { titulo: "GTA VI: eu não esperava isso no trailer novo", nicho: "romariz", youtube: "L0rYQBz0LA4", tags: ["reação", "games"], video: null, capa: null },
-      { titulo: "Camila Zanoni — Detroit, ep. 1", nicho: "cami", youtube: "jlAlwUF0e_4", tags: ["gameplay narrativo", "YouTube longo"], video: null, capa: null },
       { titulo: "Camila Zanoni — vlog da F1", nicho: "cami", youtube: "B9kNNWrh_4Q", tags: ["vlog", "corte de ritmo"], video: null, capa: null },
       { titulo: "Camila Zanoni — final da Libertadores", nicho: "cami", youtube: "j2fJV6FEpyE", tags: ["vlog", "evento"], video: null, capa: null },
       { titulo: "Camila Zanoni — gameplay Valorant", nicho: "cami", youtube: "v0EZarGDWrE", tags: ["gameplay", "edição de reação"], video: null, capa: null },
+      { titulo: "Camila Zanoni — Detroit, ep. 1", nicho: "cami", youtube: "jlAlwUF0e_4", tags: ["gameplay narrativo", "YouTube longo"], video: null, capa: null },
       { titulo: "João Bernardino — Projeto Eupresa", nicho: "joao", youtube: "WaG-NyXhfM8", tags: ["negócio digital", "série"], video: null, capa: null },
       { titulo: "Eloa — comidas estranhas", nicho: "eloa", formato: "16:9", tags: ["YouTube longo", "13 minutos"], trecho: true, video: "videos/criador-eloa.mp4", preview: "videos/criador-eloa-prev.mp4", capa: "capas/criador-eloa.jpg" },
       { titulo: "Show de bola Clips — 01", nicho: "cortes", tags: ["canal de cortes", "TikTok", "jogo completo"], trecho: true, video: "videos/criador-corte-01.mp4", preview: "videos/criador-corte-01-prev.mp4", capa: "capas/criador-corte-01.jpg" },

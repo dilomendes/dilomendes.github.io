@@ -84,13 +84,17 @@ const FAIXAS = [
     id: "curso",
     nome: "Curso e infoproduto",
     sub: "Aula gravada virando produto pronto pra vender.",
+    nichos: [
+      { id: "roma", nome: "Romariz" },
+      { id: "tree", nome: "Tree" }
+    ],
     pecas: [
-      { titulo: "Projeto 100K — introdução", formato: "16:9", tags: ["abertura do curso", "8 aulas", "R$5.297 no 1º mês"], trecho: true, video: "videos/curso-100k-intro.mp4", preview: "videos/curso-100k-intro-prev.mp4", capa: "capas/curso-100k-intro.jpg" },
-      { titulo: "Projeto 100K — aula 1", formato: "16:9", tags: ["aula montada", "comportamento humano", "5 min"], trecho: true, video: "videos/curso-100k-aula1.mp4", preview: "videos/curso-100k-aula1-prev.mp4", capa: "capas/curso-100k-aula1.jpg" },
-      { titulo: "Tree — abertura do curso", formato: "16:9", tags: ["vinheta", "identidade visual", "2022"], video: "videos/curso-tree-vinheta.mp4", preview: "videos/curso-tree-vinheta-prev.mp4", capa: "capas/curso-tree-vinheta.jpg" },
-      { titulo: "Tree — aula curta", formato: "16:9", tags: ["EAD", "diversidade", "Camtasia"], trecho: true, video: "videos/curso-tree-aula1.mp4", preview: "videos/curso-tree-aula1-prev.mp4", capa: "capas/curso-tree-aula1.jpg" },
-      { titulo: "Tree — aula completa", formato: "16:9", tags: ["EAD", "aula de 6 min"], trecho: true, video: "videos/curso-tree-aula2.mp4", preview: "videos/curso-tree-aula2-prev.mp4", capa: "capas/curso-tree-aula2.jpg" },
-      { titulo: "Tree — aula longa", formato: "16:9", tags: ["EAD", "aula de 10 min", "curso inteiro"], trecho: true, video: "videos/curso-tree-aula3.mp4", preview: "videos/curso-tree-aula3-prev.mp4", capa: "capas/curso-tree-aula3.jpg" }
+      { titulo: "Projeto 100K — introdução", nicho: "roma", formato: "16:9", tags: ["abertura do curso", "8 aulas", "R$5.297 no 1º mês"], trecho: true, video: "videos/curso-100k-intro.mp4", preview: "videos/curso-100k-intro-prev.mp4", capa: "capas/curso-100k-intro.jpg" },
+      { titulo: "Projeto 100K — aula 1", nicho: "roma", formato: "16:9", tags: ["aula montada", "comportamento humano", "5 min"], trecho: true, video: "videos/curso-100k-aula1.mp4", preview: "videos/curso-100k-aula1-prev.mp4", capa: "capas/curso-100k-aula1.jpg" },
+      { titulo: "Tree — abertura do curso", nicho: "tree", formato: "16:9", tags: ["vinheta", "identidade visual", "diversidade e inclusão"], video: "videos/curso-tree-vinheta.mp4", preview: "videos/curso-tree-vinheta-prev.mp4", capa: "capas/curso-tree-vinheta.jpg" },
+      { titulo: "Tree — aula curta", nicho: "tree", formato: "16:9", tags: ["EAD", "diversidade e inclusão", "Camtasia"], trecho: true, video: "videos/curso-tree-aula1.mp4", preview: "videos/curso-tree-aula1-prev.mp4", capa: "capas/curso-tree-aula1.jpg" },
+      { titulo: "Tree — aula completa", nicho: "tree", formato: "16:9", tags: ["EAD", "diversidade e inclusão", "aula de 6 min"], trecho: true, video: "videos/curso-tree-aula2.mp4", preview: "videos/curso-tree-aula2-prev.mp4", capa: "capas/curso-tree-aula2.jpg" },
+      { titulo: "Tree — aula longa", nicho: "tree", formato: "16:9", tags: ["EAD", "diversidade e inclusão", "aula de 10 min"], trecho: true, video: "videos/curso-tree-aula3.mp4", preview: "videos/curso-tree-aula3-prev.mp4", capa: "capas/curso-tree-aula3.jpg" }
     ]
   },
   {

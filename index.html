@@ -43,7 +43,8 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 .pill.on{color:var(--ink); background:var(--surface)}
 
 /* HERO */
-.hero{padding:52px 0 40px; display:grid; grid-template-columns:auto 1fr; gap:26px; align-items:center}
+.hero{padding:52px 0 40px; display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap}
+.hero-main{flex:1 1 420px; min-width:0; display:grid; grid-template-columns:auto 1fr; gap:26px; align-items:center}
 @media (max-width:640px){ .hero{grid-template-columns:1fr; gap:18px; padding:36px 0 30px} }
 .avatar{width:104px; height:104px; border-radius:50%; object-fit:cover; border:1px solid var(--line-2); background:var(--surface)}
 .avatar-fb{width:104px; height:104px; border-radius:50%; border:1px dashed var(--line-2); background:var(--surface); display:grid; place-items:center; font-size:.6rem; color:var(--ink-3); text-align:center; padding:10px; letter-spacing:.06em}
@@ -123,7 +124,7 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 .lb-grid img{width:100%; aspect-ratio:3/4; object-fit:contain; display:block; border-radius:8px; background:#111}
 .lang{margin-left:auto; flex:0 0 auto; border:1px solid var(--linha); background:transparent; color:var(--ink-2); font:inherit; font-size:.68rem; font-weight:600; letter-spacing:.1em; padding:5px 10px; border-radius:99px; cursor:pointer}
 .lang:hover{color:var(--ink); border-color:var(--ink-3)}
-.curtir{margin-top:20px; display:inline-flex; align-items:center; gap:9px; border:1px solid var(--linha);
+.curtir{flex:0 0 auto; display:inline-flex; align-items:center; gap:9px; border:1px solid var(--linha);
   background:transparent; color:var(--ink-2); font:inherit; font-size:.82rem; font-weight:600;
   padding:10px 18px; border-radius:99px; cursor:pointer; transition:color .18s, border-color .18s, transform .12s}
 .curtir:hover{color:var(--ink); border-color:var(--ink-3)}
@@ -155,16 +156,18 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 </div>
 
 <div class="wrap">
-  <header class="hero" id="hero"></header>
+  <header class="hero" id="hero">
+    <div class="hero-main" id="heroConteudo"></div>
+    <button class="curtir" id="curtir" type="button" hidden>
+      <svg class="coracao" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.6 13a4.6 4.6 0 0 1 6.5-6.5l.9.9.9-.9A4.6 4.6 0 1 1 19.4 13Z"/></svg>
+      <span id="curtirTxt"></span><span class="curtir-n" id="curtirN"></span>
+    </button>
+  </header>
   <main id="faixas"></main>
   <section class="closing" id="contato">
     <h2>Manda a referência</h2>
     <p>Me diz o que você tem em mente. Eu produzo, você aprova.</p>
     <div class="hero-links" id="contatoLinks"></div>
-    <button class="curtir" id="curtir" type="button" hidden>
-      <svg class="coracao" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.6 13a4.6 4.6 0 0 1 6.5-6.5l.9.9.9-.9A4.6 4.6 0 1 1 19.4 13Z"/></svg>
-      <span id="curtirTxt"></span><span class="curtir-n" id="curtirN"></span>
-    </button>
   </section>
 </div>
 
@@ -177,7 +180,7 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 </div>
 
 <script src="i18n.js?v=2"></script>
-<script src="pecas.js?v=20260929d"></script>
+<script src="pecas.js?v=20260929e"></script>
 <script>
 /* IDIOMA: português é a fonte; o inglês é uma camada por cima.
    O que não estiver no i18n.js cai de volta pro português. */
@@ -204,7 +207,7 @@ function render(){
 
 /* HERO */
 document.getElementById("mark").textContent = PERFIL.nome;
-document.getElementById("hero").innerHTML =
+document.getElementById("heroConteudo").innerHTML =
   '<img class="avatar" src="' + PERFIL.foto + '" alt="' + PERFIL.nome + '" onerror="this.outerHTML=\'<div class=&quot;avatar-fb&quot;>FOTO</div>\'">' +
   '<div><h1>' + PERFIL.nome + '</h1><p class="bio">' + ((D() && D().bio) || PERFIL.bio) + '</p>' +
   '<div class="hero-links">' +
@@ -364,9 +367,12 @@ document.querySelectorAll(".arrow").forEach(function(btn){
 });
 
 document.querySelectorAll(".track").forEach(function(track){
-  const rail = track.closest(".rail");
-  const prev = rail.querySelector('.arrow[data-dir="-1"]');
-  const next = rail.querySelector(".arrow.next");
+  /* as setas moram no cabeçalho do PRÓPRIO bloco. Buscar na seção inteira
+     fazia todas as filas de uma faixa ramificada mexerem nas setas da
+     primeira, e a última medição (de uma fila escondida) escondia elas. */
+  const bloco = track.closest(".sub") || track.closest(".rail");
+  const prev = bloco.querySelector('.arrow[data-dir="-1"]');
+  const next = bloco.querySelector(".arrow.next");
   const moldura = track.closest(".rail-track");
 
   function medir(){

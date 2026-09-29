@@ -123,6 +123,16 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 .lb-grid img{width:100%; aspect-ratio:3/4; object-fit:contain; display:block; border-radius:8px; background:#111}
 .lang{margin-left:auto; flex:0 0 auto; border:1px solid var(--linha); background:transparent; color:var(--ink-2); font:inherit; font-size:.68rem; font-weight:600; letter-spacing:.1em; padding:5px 10px; border-radius:99px; cursor:pointer}
 .lang:hover{color:var(--ink); border-color:var(--ink-3)}
+.curtir{margin-top:20px; display:inline-flex; align-items:center; gap:9px; border:1px solid var(--linha);
+  background:transparent; color:var(--ink-2); font:inherit; font-size:.82rem; font-weight:600;
+  padding:10px 18px; border-radius:99px; cursor:pointer; transition:color .18s, border-color .18s, transform .12s}
+.curtir:hover{color:var(--ink); border-color:var(--ink-3)}
+.curtir:active{transform:scale(.97)}
+.curtir .coracao{width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linejoin:round}
+.curtir.on{color:#ff4d6d; border-color:#ff4d6d}
+.curtir.on .coracao{fill:#ff4d6d; stroke:#ff4d6d}
+.curtir-n{font-variant-numeric:tabular-nums; opacity:.65}
+.curtir-n:empty{display:none}
 .lb-close{position:absolute; top:16px; right:18px; width:38px; height:38px; border-radius:99px; border:1px solid rgba(255,255,255,.22); background:transparent; color:#fff; cursor:pointer; display:grid; place-items:center}
 .lb-cap{position:absolute; left:0; right:0; bottom:20px; text-align:center; color:rgba(255,255,255,.6); font-size:.76rem}
 
@@ -151,6 +161,10 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
     <h2>Manda a referência</h2>
     <p>Me diz o que você tem em mente. Eu produzo, você aprova.</p>
     <div class="hero-links" id="contatoLinks"></div>
+    <button class="curtir" id="curtir" type="button" hidden>
+      <svg class="coracao" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.6 13a4.6 4.6 0 0 1 6.5-6.5l.9.9.9-.9A4.6 4.6 0 1 1 19.4 13Z"/></svg>
+      <span id="curtirTxt"></span><span class="curtir-n" id="curtirN"></span>
+    </button>
   </section>
 </div>
 
@@ -162,8 +176,8 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
   <p class="lb-cap" id="lbCap"></p>
 </div>
 
-<script src="i18n.js?v=1"></script>
-<script src="pecas.js?v=20260929c"></script>
+<script src="i18n.js?v=2"></script>
+<script src="pecas.js?v=20260929d"></script>
 <script>
 /* IDIOMA: português é a fonte; o inglês é uma camada por cima.
    O que não estiver no i18n.js cai de volta pro português. */
@@ -407,10 +421,59 @@ btLang.addEventListener("click", function(){
   LANG = LANG === "pt" ? "en" : "pt";
   try { localStorage.setItem("lang", LANG); } catch(e){}
   pintaBotao();
+  if (window.rotulaCurtida) window.rotulaCurtida();
   document.getElementById("nav").innerHTML = "";
   document.getElementById("faixas").innerHTML = "";
   render();
 });
+
+/* CURTIDA
+   Contador publico e anonimo: guarda so um numero, nenhum dado de quem clicou.
+   Roda no Abacus (abacus.jasoncameron.dev), gratis e sem conta. Se um dia sair
+   do ar, o botao simplesmente nao aparece — a pagina nao quebra.
+   Pra trocar de servico, muda so as duas URLs aqui embaixo. */
+const CURTIDA = {
+  ler:  "https://abacus.jasoncameron.dev/get/dilomendes-portfolio/curtidas-portfolio",
+  somar:"https://abacus.jasoncameron.dev/hit/dilomendes-portfolio/curtidas-portfolio"
+};
+
+(function(){
+  const bt = document.getElementById("curtir");
+  const txt = document.getElementById("curtirTxt");
+  const num = document.getElementById("curtirN");
+  let jaCurtiu = false;
+  try { jaCurtiu = localStorage.getItem("curtiu") === "1"; } catch(e){}
+
+  function rotula(){
+    txt.textContent = jaCurtiu ? U("curtido", "Valeu!") : U("curtir", "Curtir");
+    bt.classList.toggle("on", jaCurtiu);
+  }
+  window.rotulaCurtida = rotula;
+
+  function mostra(n){
+    num.textContent = (typeof n === "number" && n > 0) ? n : "";
+    bt.hidden = false;
+    rotula();
+  }
+
+  fetch(CURTIDA.ler)
+    .then(function(r){ return r.json(); })
+    .then(function(d){ mostra(typeof d.value === "number" ? d.value : 0); })
+    .catch(function(){ /* fora do ar: o botao fica escondido */ });
+
+  bt.addEventListener("click", function(){
+    if (jaCurtiu) return;
+    jaCurtiu = true;
+    try { localStorage.setItem("curtiu", "1"); } catch(e){}
+    const atual = parseInt(num.textContent, 10) || 0;
+    num.textContent = atual + 1;
+    rotula();
+    fetch(CURTIDA.somar)
+      .then(function(r){ return r.json(); })
+      .then(function(d){ if (typeof d.value === "number") num.textContent = d.value; })
+      .catch(function(){ /* o numero real chega na proxima visita */ });
+  });
+})();
 
 /* lightbox */
 const lb = document.getElementById("lb"), lbVideo = document.getElementById("lbVideo"), lbCap = document.getElementById("lbCap");

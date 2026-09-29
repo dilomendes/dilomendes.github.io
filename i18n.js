@@ -19,7 +19,9 @@ const I18N = {
       rodape:        "Dilo · editing since 2020",
       trecho:        "30s excerpt",
       imagens:       "images",
-      fechar:        "Close"
+      fechar:        "Close",
+      curtir:        "Like",
+      curtido:       "Thanks!"
     },
 
     bio: "I have been editing video since 2020. Today I use AI to do what used to need a crew: characters whose faces stay the same, stories from script to final cut, and finished work without the client filming anything.",

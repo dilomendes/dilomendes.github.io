@@ -134,6 +134,23 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
 .curtir.on .coracao{fill:#ff4d6d; stroke:#ff4d6d}
 .curtir-n{font-variant-numeric:tabular-nums; opacity:.65}
 .curtir-n:empty{display:none}
+.form{margin-top:26px; max-width:640px; display:flex; flex-direction:column; gap:10px}
+.form-linha{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+@media (max-width:560px){.form-linha{grid-template-columns:1fr}}
+.form input, .form textarea{width:100%; font:inherit; font-size:.92rem; color:var(--ink);
+  background:var(--surface); border:1px solid var(--line-2); border-radius:12px; padding:12px 14px;
+  resize:vertical; transition:border-color .18s}
+.form input::placeholder, .form textarea::placeholder{color:var(--ink-3)}
+.form input:focus, .form textarea:focus{outline:none; border-color:var(--ink-3)}
+.form input.erro, .form textarea.erro{border-color:#ff4d6d}
+.form-pe{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:2px}
+.enviar{font:inherit; font-size:.85rem; font-weight:600; color:var(--bg); background:var(--ink);
+  border:0; border-radius:99px; padding:12px 26px; cursor:pointer; transition:opacity .18s}
+.enviar:hover{opacity:.85}
+.enviar[disabled]{opacity:.5; cursor:default}
+.form-msg{font-size:.82rem; color:var(--ink-2)}
+.form-msg.ok{color:#4ade80}
+.form-msg.ruim{color:#ff4d6d}
 .lb-close{position:absolute; top:16px; right:18px; width:38px; height:38px; border-radius:99px; border:1px solid rgba(255,255,255,.22); background:transparent; color:#fff; cursor:pointer; display:grid; place-items:center}
 .lb-cap{position:absolute; left:0; right:0; bottom:20px; text-align:center; color:rgba(255,255,255,.6); font-size:.76rem}
 
@@ -165,9 +182,20 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
   </header>
   <main id="faixas"></main>
   <section class="closing" id="contato">
-    <h2>Manda a referência</h2>
-    <p>Me diz o que você tem em mente. Eu produzo, você aprova.</p>
+    <h2>Manda sua ideia</h2>
+    <p>Não precisa ter referência pronta. Descreve o que você imaginou — eu produzo, você aprova.</p>
     <div class="hero-links" id="contatoLinks"></div>
+    <form class="form" id="form" novalidate>
+      <div class="form-linha">
+        <input id="fNome" name="nome" autocomplete="name" required>
+        <input id="fContato" name="contato" autocomplete="email" required>
+      </div>
+      <textarea id="fIdeia" name="ideia" rows="5" required></textarea>
+      <div class="form-pe">
+        <button class="enviar" id="fEnviar" type="submit"></button>
+        <span class="form-msg" id="fMsg" role="status"></span>
+      </div>
+    </form>
   </section>
 </div>
 
@@ -179,8 +207,8 @@ h1,h2{margin:0; font-weight:900; letter-spacing:-.02em; line-height:1}
   <p class="lb-cap" id="lbCap"></p>
 </div>
 
-<script src="i18n.js?v=2"></script>
-<script src="pecas.js?v=20260929e"></script>
+<script src="i18n.js?v=3"></script>
+<script src="pecas.js?v=20260929f"></script>
 <script>
 /* IDIOMA: português é a fonte; o inglês é uma camada por cima.
    O que não estiver no i18n.js cai de volta pro português. */
@@ -212,17 +240,17 @@ document.getElementById("heroConteudo").innerHTML =
   '<div><h1>' + PERFIL.nome + '</h1><p class="bio">' + ((D() && D().bio) || PERFIL.bio) + '</p>' +
   '<div class="hero-links">' +
   '<a class="hlink" href="' + PERFIL.instagram + '" target="_blank" rel="noopener">' + PERFIL.arroba + '</a>' +
-  '<a class="hlink" href="mailto:' + PERFIL.email + '">' + PERFIL.email + '</a>' +
+  '<a class="hlink" href="mailto:' + PERFIL.email + '">' + U("email", "E-mail") + '</a>' +
   '</div></div>';
 
-document.querySelector("#contato h2").textContent = U("contatoTitulo", "Manda a referência");
-document.querySelector("#contato p").textContent = U("contatoSub", "Me diz o que você tem em mente. Eu produzo, você aprova.");
+document.querySelector("#contato h2").textContent = U("contatoTitulo", "Manda sua ideia");
+document.querySelector("#contato p").textContent = U("contatoSub", "Não precisa ter referência pronta. Descreve o que você imaginou — eu produzo, você aprova.");
 document.querySelector(".foot").textContent = U("rodape", "Dilo · editando desde 2020");
 document.getElementById("lbClose").setAttribute("aria-label", U("fechar", "Fechar"));
 
 document.getElementById("contatoLinks").innerHTML =
   '<a class="hlink" href="' + PERFIL.instagram + '" target="_blank" rel="noopener">' + PERFIL.arroba + '</a>' +
-  '<a class="hlink" href="mailto:' + PERFIL.email + '">' + PERFIL.email + '</a>';
+  '<a class="hlink" href="mailto:' + PERFIL.email + '">' + U("email", "E-mail") + '</a>';
 
 /* FAIXAS */
 const nav = document.getElementById("nav");
@@ -428,10 +456,84 @@ btLang.addEventListener("click", function(){
   try { localStorage.setItem("lang", LANG); } catch(e){}
   pintaBotao();
   if (window.rotulaCurtida) window.rotulaCurtida();
+  if (window.rotulaForm) window.rotulaForm();
   document.getElementById("nav").innerHTML = "";
   document.getElementById("faixas").innerHTML = "";
   render();
 });
+
+/* FORMULÁRIO — "manda sua ideia"
+   Sem chave: monta o e-mail e abre o programa de e-mail da pessoa.
+   Com chave do Web3Forms (web3forms.com, grátis): manda direto pro Gmail
+   do Dilo sem sair do site, e o endereço nunca aparece na página.
+   Pra ligar, é só colar a chave aqui embaixo. */
+const FORM = { chave: "" };
+
+(function(){
+  const f = document.getElementById("form");
+  const nome = document.getElementById("fNome");
+  const contato = document.getElementById("fContato");
+  const ideia = document.getElementById("fIdeia");
+  const bt = document.getElementById("fEnviar");
+  const msg = document.getElementById("fMsg");
+
+  function rotula(){
+    nome.placeholder = U("fNome", "Seu nome");
+    contato.placeholder = U("fContato", "E-mail ou WhatsApp");
+    ideia.placeholder = U("fIdeia", "Conta a ideia: o que você quer que apareça no vídeo, pra quem é, e pra quando.");
+    bt.textContent = U("fEnviar", "Mandar");
+  }
+  window.rotulaForm = rotula;
+  rotula();
+
+  function aviso(txt, tipo){
+    msg.textContent = txt;
+    msg.className = "form-msg" + (tipo ? " " + tipo : "");
+  }
+
+  f.addEventListener("submit", function(e){
+    e.preventDefault();
+    [nome, contato, ideia].forEach(function(c){ c.classList.remove("erro"); });
+    const vazio = [nome, contato, ideia].filter(function(c){ return !c.value.trim(); });
+    if (vazio.length){
+      vazio.forEach(function(c){ c.classList.add("erro"); });
+      vazio[0].focus();
+      aviso(U("fFalta", "Preenche os três campos."), "ruim");
+      return;
+    }
+
+    if (!FORM.chave){
+      /* sem chave: abre o e-mail já escrito */
+      const assunto = encodeURIComponent((U("fAssunto", "Ideia de vídeo") ) + " — " + nome.value.trim());
+      const corpo = encodeURIComponent(
+        nome.value.trim() + "\n" + contato.value.trim() + "\n\n" + ideia.value.trim());
+      window.location.href = "mailto:" + PERFIL.email + "?subject=" + assunto + "&body=" + corpo;
+      aviso(U("fAbrindo", "Abrindo seu e-mail com a mensagem pronta."), "ok");
+      return;
+    }
+
+    bt.disabled = true;
+    aviso(U("fEnviando", "Mandando..."));
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        access_key: FORM.chave,
+        subject: "Portfólio — ideia de " + nome.value.trim(),
+        name: nome.value.trim(),
+        email: contato.value.trim(),
+        message: ideia.value.trim()
+      })
+    }).then(function(r){ return r.json(); }).then(function(d){
+      bt.disabled = false;
+      if (d && d.success){ f.reset(); aviso(U("fOk", "Recebido. Te respondo em breve."), "ok"); }
+      else aviso(U("fRuim", "Não deu certo. Tenta pelo botão de e-mail aqui em cima."), "ruim");
+    }).catch(function(){
+      bt.disabled = false;
+      aviso(U("fRuim", "Não deu certo. Tenta pelo botão de e-mail aqui em cima."), "ruim");
+    });
+  });
+})();
 
 /* CURTIDA
    Contador publico e anonimo: guarda so um numero, nenhum dado de quem clicou.

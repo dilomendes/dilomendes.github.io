@@ -13,8 +13,19 @@ const I18N = {
   en: {
 
     ui: {
-      contatoTitulo: "Send me the reference",
-      contatoSub:    "Tell me what you have in mind. I produce it, you approve it.",
+      contatoTitulo: "Send me your idea",
+      contatoSub:    "You do not need a reference ready. Describe what you pictured — I produce it, you approve it.",
+      email:         "E-mail",
+      fNome:         "Your name",
+      fContato:      "E-mail or WhatsApp",
+      fIdeia:        "Tell me the idea: what you want on screen, who it is for, and by when.",
+      fEnviar:       "Send",
+      fFalta:        "Please fill in all three fields.",
+      fAssunto:      "Video idea",
+      fAbrindo:      "Opening your mail app with the message ready.",
+      fEnviando:     "Sending...",
+      fOk:           "Got it. I will get back to you shortly.",
+      fRuim:         "That did not go through. Try the e-mail button above.",
       contatoPill:   "Contact",
       rodape:        "Dilo · editing since 2020",
       trecho:        "30s excerpt",
